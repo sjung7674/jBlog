@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hjb.jBlog.mapper.Member">
+	<select id="selectUserByUserid" parameterType="String" resultType="MemberDTO"> 
+		select idx,userid,password from member where userid=#{value}
+	</select>
+</mapper>
