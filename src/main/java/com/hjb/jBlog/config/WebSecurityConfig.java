@@ -1,7 +1,10 @@
 package com.hjb.jBlog.config;
 
+import javax.annotation.Resource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -15,20 +18,21 @@ import com.hjb.jBlog.common.LoginFailHandler;
 import com.hjb.jBlog.common.LoginSuccessHandler;
 import com.hjb.jBlog.service.impl.MemberServiceImpl;
 
+@Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	@Autowired 
 	private LoginSuccessHandler loginSuccessHandler;
 	@Autowired 
 	private LoginFailHandler loginFailHandler;
-	@Autowired 
-	private MemberServiceImpl memberServiceImpl;
+	@Autowired
+	private UserDetailsService userDetailsService;
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 			.authorizeRequests()
-				.antMatchers("/write").hasRole("ROLE_USER")
+				.antMatchers("/write").hasRole("USER")
 				.and()
 			.formLogin()
 				.loginPage("/member/login")
@@ -42,24 +46,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 				.logoutSuccessUrl("/member/logout")
 				.logoutUrl("/member/j_spring_security_logout")
 				.invalidateHttpSession(true);
-				
+		http.antMatcher("**/smarteditor2/**").headers().frameOptions().sameOrigin();
 	}
 
 	@Override 
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception { 
-		auth.authenticationProvider(authenticationProvider)
-		auth.userDetailsService(userDetailsService()).passwordEncoder(passwordEncoder()); 
-	}
-	
-	@Bean 
-	public PasswordEncoder passwordEncoder() { 
-		return new BCryptPasswordEncoder(); 
-	} 
-	
-	@Bean
-	public AuthenticationProvider springAuthenticationProvider() {
-		
-		return new AuthenticationProvider();
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+	    auth.userDetailsService(userDetailsService).passwordEncoder(encoder);
 	}
 
 	
