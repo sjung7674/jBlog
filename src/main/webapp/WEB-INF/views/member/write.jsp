@@ -7,13 +7,31 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>jBlog</title>
+    
     <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/bootstrap-theme.min.css" rel="stylesheet">
     <link href="/css/member/member.css" rel="stylesheet">
   </head>
   <body>
   	<jsp:include page="../include/nav.jsp"/>
   	<div class="container-fluid" id="container">
-  		<textarea name="ir1" id="ir1" rows="10" cols="100" style="height:400px;">${dto.goods_sub_title}</textarea>
+		<div style="margin-bottom:5px;">
+		    <div class="input-group">
+		      <div class="input-group-btn">
+		        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="category_btn" aria-expanded="false">선택하세요. <span class="caret"></span></button>
+		        <ul class="dropdown-menu" role="menu">
+		          <li><a href="javascript:;" data-value="1" onclick="click_category(this)">맛딥</a></li>
+		        </ul>
+		      </div><!-- /btn-group -->
+		      <input type="hidden" id="category" value="">
+		      <input type="text" class="form-control" id="title" aria-label="제목">
+		    </div><!-- /input-group -->
+	    </div><!-- /.col-lg-6 -->
+  		<textarea name="ir1" id="ir1" rows="10" cols="100"></textarea>
+  		<div class="text-center">
+  			<button class="btn btn-default" onclick="jBlog.save();">저장</button>
+  			<button class="btn btn-default" onclick="jBlog.cancel();">취소</button>
+  		</div>
   	</div>
   	<input type="hidden"	name="${_csrf.parameterName}"	value="${_csrf.token}"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
