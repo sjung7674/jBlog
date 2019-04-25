@@ -9,9 +9,10 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 public class MemberDTO implements UserDetails {
-	private int idx;
-	private String userid;
-	private String password;
+	private int idx = -1;
+	private String userid = "";
+	private String password = "";
+	private String user_image="";
 	
 	public int getIdx() {
 		return idx;
@@ -30,6 +31,13 @@ public class MemberDTO implements UserDetails {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public String getUser_image() {
+		return user_image;
+	}
+	public void setUser_image(String user_image) {
+		this.user_image = user_image;
 	}
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -63,6 +71,11 @@ public class MemberDTO implements UserDetails {
 	public boolean isEnabled() {
 		// TODO Auto-generated method stub
 		return true;
+	}
+	@Override
+	public String toString() {
+		return "MemberDTO [idx=" + idx + ", userid=" + userid + ", password=" + password + ", user_image=" + user_image
+				+ "]";
 	}
 	
 }

@@ -44,8 +44,27 @@ var jBlog = {
 					type : "post",
 					data: {"category":category,"title":title, "content":Global_Smart_Editor_Get_Content_For_Editor("ir1")},
 					headers : headers,
-					success : function(html) {
+					success : function(obj) {
+						console.log(obj);
+						var json_obj = $.parseJSON(obj);
+						var json_errors=json_obj.errors;
+						var json_success=json_obj.success;
+						var message="";
+						if(json_errors){
+							for(var i in json_errors){
+								message+=json_errors[i].message+"\n";
+							}
+							alert(message);
+						}else if(json_success){
+							for(var i in json_success){
+								message+=json_success[i].message+"\n";
+							}
+							alert(message);
+						}
 						
+					},
+					error: function(){
+						alert("오류가 발생하였습니다.");
 					}
 			});
 		},

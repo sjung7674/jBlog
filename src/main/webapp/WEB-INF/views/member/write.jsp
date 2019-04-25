@@ -20,7 +20,9 @@
 		      <div class="input-group-btn">
 		        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="category_btn" aria-expanded="false">선택하세요. <span class="caret"></span></button>
 		        <ul class="dropdown-menu" role="menu">
-		          <li><a href="javascript:;" data-value="1" onclick="click_category(this)">맛딥</a></li>
+		        	<c:forEach items="${categoryList }"  var="list">
+		        		<li><a href="javascript:;" data-value="${list.idx }" onclick="click_category(this)">${list.category }</a></li>
+		        	</c:forEach>
 		        </ul>
 		      </div><!-- /btn-group -->
 		      <input type="hidden" id="category" value="">

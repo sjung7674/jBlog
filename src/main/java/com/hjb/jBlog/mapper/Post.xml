@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hjb.jBlog.mapper.Post">
+	<insert id="insertPost" parameterType="PostDTO"> 
+		Insert into post (userid,category,title,content) values(#{userid},#{category},#{title},#{content})
+	</insert>
+	<select id="selectPostByIdx" parameterType="String" resultType="PostDTO">
+		Select p.idx, p.userid, m.user_image, category, title, content, reg_date from post p inner join member m on p.userid=m.userid where p.idx=#{value}
+	</select>
+</mapper>

@@ -30,6 +30,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 				.antMatchers("/css/**").permitAll()
 				.antMatchers("/smarteditor2/**").hasRole("USER")
 				.antMatchers("/write").hasRole("USER")
+				.antMatchers("/save").hasRole("USER")
 				.and()
 			.formLogin()
 				.loginPage("/member/login")
