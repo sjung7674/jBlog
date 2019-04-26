@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.hjb.jBlog.common.LoginFailHandler;
 import com.hjb.jBlog.common.LoginSuccessHandler;
@@ -41,8 +42,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 				.failureHandler(loginFailHandler)
 				.and()
 			.logout()
-				.logoutSuccessUrl("/member/logout")
-				.logoutUrl("/member/j_spring_security_logout")
+				.logoutSuccessUrl("/")
+				.logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))//기본이 post라 get으로 변경
 				.invalidateHttpSession(true)
 				.and()
 			.headers()

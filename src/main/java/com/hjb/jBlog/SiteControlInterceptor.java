@@ -1,5 +1,7 @@
 package com.hjb.jBlog;
 
+import java.util.Enumeration;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -17,6 +19,10 @@ public class SiteControlInterceptor extends HandlerInterceptorAdapter{
 			throws Exception {
 		System.out.println("in--");
 		request.setAttribute("categoryList", writeService.getCategory());
+		Enumeration e = request.getSession().getAttributeNames();
+		while(e.hasMoreElements()){
+			System.out.println(e.nextElement());
+		}
 		return super.preHandle(request, response, handler);
 	}
 	

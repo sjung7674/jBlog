@@ -2,53 +2,92 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="ko">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>jBlog</title>
-    
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/css/bootstrap-theme.min.css" rel="stylesheet">
-    <link href="/css/member/member.css" rel="stylesheet">
-  </head>
-  <body>
-  	<jsp:include page="../include/nav.jsp"/>
-  	<div class="container-fluid" id="container">
-		<div style="margin-bottom:5px;">
-		    <div class="input-group">
-		      <div class="input-group-btn">
-		        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="category_btn" aria-expanded="false">선택하세요. <span class="caret"></span></button>
-		        <ul class="dropdown-menu" role="menu">
-		        	<c:forEach items="${categoryList }"  var="list">
-		        		<li><a href="javascript:;" data-value="${list.idx }" onclick="click_category(this)">${list.category }</a></li>
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>jBlog</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+  <!-- Custom styles for this template -->
+  <link href="/css/template/clean-blog.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+<jsp:include page="../include/nav.jsp"/>
+  <!-- Main Content -->
+  <div class="container mt-5 pt-5">
+    <div class="row">
+      <div class="col mx-auto">
+      	<div style="margin-bottom:5px;">
+      		<div class="input-group input-group-sm mb-1">
+			  <div class="input-group-prepend">
+			    <button class="btn btn-outline-secondary dropdown-toggle" id="category_btn" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="min-width:100px">선택하세요.</button>
+			    <div class="dropdown-menu">
+			    	<c:forEach items="${categoryList }"  var="list">
+			    		<a class="dropdown-item" href="javascript:;" data-value="${list.idx }" onclick="click_category(this)">${list.category }</a>
 		        	</c:forEach>
-		        </ul>
-		      </div><!-- /btn-group -->
-		      <input type="hidden" id="category" value="">
-		      <input type="text" class="form-control" id="title" aria-label="제목">
-		    </div><!-- /input-group -->
+			    </div>
+			  </div>
+			  <input type="hidden" id="category" value="">
+			  <input type="text" id="title" class="form-control" aria-label="제목">
+			</div>
+			<div class="input-group input-group-sm mb-1">
+			  	<div class="input-group-prepend">
+			    	<span class="input-group-text d-block text-center" id="inputGroup-sizing-sm" style="min-width:100px">부제목</span>
+			  	</div>
+			  		<input type="text" id="sub_title" class="form-control" aria-label="부제" aria-describedby="inputGroup-sizing-sm">
+			</div>
+			<div class="input-group input-group-sm mb-1">
+			  <div class="input-group-prepend">
+			    <span class="input-group-text d-block text-center" style="min-width:100px">헤더 이미지</span>
+			  </div>
+			  <div class="custom-file">
+			    <input type="file" class="custom-file-input" id="inputGroupFile01">
+			    <label class="custom-file-label" for="inputGroupFile01">파일을 선택하세요</label>
+			  </div>
+			</div>
 	    </div><!-- /.col-lg-6 -->
   		<textarea name="ir1" id="ir1" rows="10" cols="100"></textarea>
-  		<div class="text-center">
-  			<button class="btn btn-default" onclick="jBlog.save();">저장</button>
-  			<button class="btn btn-default" onclick="jBlog.cancel();">취소</button>
-  		</div>
-  	</div>
-  	<input type="hidden"	name="${_csrf.parameterName}"	value="${_csrf.token}"/>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/jBlog.js"></script>
-    <script type="text/javascript" src="/js/smart_editor.js"></script>
+  		<div class="btn-group btn-group-sm float-right" role="group" aria-label="submit_or_cancel">
+		  <button type="button" class="btn btn-outline-primary" onclick="jBlog.save();">저장</button>
+		  <button type="button" class="btn btn-outline-danger" onclick="jBlog.cancel();">취소</button>
+		</div>
+  		<input type="hidden"	name="${_csrf.parameterName}"	value="${_csrf.token}"/>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+<jsp:include page="../include/footer.jsp"/>
+  <!-- Bootstrap core JavaScript -->
+  <script src="/vendor/jquery/jquery.min.js"></script>
+  <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Custom scripts for this template -->
+	<script type="text/javascript" src="/js/smart_editor.js"></script>
 	<script type="text/javascript" src="/smarteditor2/js/service/HuskyEZCreator.js"></script>  
+	<script type="text/javascript" src="/js/jBlog.js"></script>
+<script>
+$('#mainNav').addClass('is-visible is-fixed');
+var Editor_Obj_ID = "";
 
-	<script type="text/javascript">
-		var Editor_Obj_ID = "";
-		
-		$(document).ready(function () {
-			Editor_Obj_ID = Global_Create_Smart_Editor("ir1");
-		});
+$(document).ready(function () {
+	Editor_Obj_ID = Global_Create_Smart_Editor("ir1");
+});
 
-	</script>
-  </body>
+</script>
+</body>
+
 </html>

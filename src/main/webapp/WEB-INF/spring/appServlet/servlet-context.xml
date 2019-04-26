@@ -28,6 +28,8 @@
 	<resources mapping="/resources/**" location="/resources/" />
 	<resources mapping="css/**" location="/WEB-INF/views/css/" />
 	<resources mapping="js/**" location="/WEB-INF/views/js/" />
+	<resources mapping="vendor/**" location="/WEB-INF/views/vendor/" />
+	<resources mapping="img/**" location="/WEB-INF/views/img/" />
 	<resources mapping="/smarteditor2/**" location="/WEB-INF/views/smarteditor2/" />
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">

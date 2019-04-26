@@ -44,6 +44,6 @@ public class HomeController {
 		System.out.println(hashedPassword);*/
 		model.addAttribute("serverTime", formattedDate );
 		
-		return "home";
+		return "index";
 	}
 }

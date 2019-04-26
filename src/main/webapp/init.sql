@@ -18,6 +18,7 @@ CREATE TABLE `jblog`.`post`(
  FOREIGN KEY (`category`) REFERENCES category (`idx`) ON DELETE RESTRICT ON UPDATE CASCADE
  ) ENGINE=INNODB CHARSET=utf8 COLLATE=utf8_general_ci 
  AUTO_INCREMENT=1; 
+ALTER TABLE `jblog`.`post` ADD COLUMN `sub_title` VARCHAR(1000) NULL AFTER `title`; 
 
 CREATE TABLE `jblog`.`admin`( 
 `idx` INT(11) NOT NULL AUTO_INCREMENT, 

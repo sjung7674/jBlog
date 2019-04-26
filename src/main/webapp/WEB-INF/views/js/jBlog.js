@@ -75,7 +75,7 @@ var jBlog = {
 		}
 }
 function click_category(obj){
-	$("#category_btn").html($(obj).text()+"&nbsp;<span class='caret'></span>");
+	$("#category_btn").html($(obj).text());
 	$("#category").val($(obj).data("value"));
 	
 	
