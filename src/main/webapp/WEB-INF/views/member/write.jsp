@@ -45,17 +45,17 @@
 			</div>
 			<div class="input-group input-group-sm mb-1">
 			  	<div class="input-group-prepend">
-			    	<span class="input-group-text d-block text-center" id="inputGroup-sizing-sm" style="min-width:100px">부제목</span>
+			    	<span class="input-group-text text-center" id="inputGroup-sizing-sm" style="min-width:100px">부제목</span>
 			  	</div>
 			  		<input type="text" id="sub_title" class="form-control" aria-label="부제" aria-describedby="inputGroup-sizing-sm">
 			</div>
 			<div class="input-group input-group-sm mb-1">
 			  <div class="input-group-prepend">
-			    <span class="input-group-text d-block text-center" style="min-width:100px">헤더 이미지</span>
+			    <span class="input-group-text text-center" style="min-width:100px">헤더 이미지</span>
 			  </div>
-			  <div class="custom-file">
-			    <input type="file" class="custom-file-input" id="inputGroupFile01">
-			    <label class="custom-file-label" for="inputGroupFile01">파일을 선택하세요</label>
+			  <div class="custom-file" style="height:37.99px">
+			    <input type="file" class="custom-file-input" id="inputGroupFile01" style="height:unset;" onchange="file_change(this);">
+			    <label class="custom-file-label" for="inputGroupFile01" style="font-size:medium;">파일을 선택하세요</label>
 			  </div>
 			</div>
 	    </div><!-- /.col-lg-6 -->

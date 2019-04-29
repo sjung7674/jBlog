@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -45,62 +46,44 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
-        <div class="post-preview">
-          <a href="post.html">
-            <h2 class="post-title">
-              Man must explore, and this is exploration at its greatest
-            </h2>
-            <h3 class="post-subtitle">
-              Problems look mighty small from 150 miles up
-            </h3>
-          </a>
-          <p class="post-meta">Posted by
-            <a href="#">Start Bootstrap</a>
-            on September 24, 2019</p>
-        </div>
-        <hr>
-        <div class="post-preview">
-          <a href="post.html">
-            <h2 class="post-title">
-              I believe every human has a finite number of heartbeats. I don't intend to waste any of mine.
-            </h2>
-          </a>
-          <p class="post-meta">Posted by
-            <a href="#">Start Bootstrap</a>
-            on September 18, 2019</p>
-        </div>
-        <hr>
-        <div class="post-preview">
-          <a href="post.html">
-            <h2 class="post-title">
-              Science has not yet mastered prophecy
-            </h2>
-            <h3 class="post-subtitle">
-              We predict too much for the next year and yet far too little for the next ten.
-            </h3>
-          </a>
-          <p class="post-meta">Posted by
-            <a href="#">Start Bootstrap</a>
-            on August 24, 2019</p>
-        </div>
-        <hr>
-        <div class="post-preview">
-          <a href="post.html">
-            <h2 class="post-title">
-              Failure is not an option
-            </h2>
-            <h3 class="post-subtitle">
-              Many say exploration is part of our destiny, but itâs actually our duty to future generations.
-            </h3>
-          </a>
-          <p class="post-meta">Posted by
-            <a href="#">Start Bootstrap</a>
-            on July 8, 2019</p>
-        </div>
-        <hr>
+      	<c:forEach items="${post_list}" var="list">
+      		<div class="post-preview">
+	          <a href="/view/${list.idx }">
+	            <h2 class="post-title">
+	              ${list.title }
+	            </h2>
+	            <h3 class="post-subtitle">
+	              ${list.sub_title }
+	            </h3>
+	          </a>
+	          <p class="post-meta">Posted by
+	            <a href="#">${list.userid }</a>
+	            on <fmt:formatDate value="${list.reg_date}" pattern="yyyy-MM-dd"/></p>
+	        </div>
+	        <hr>
+      	</c:forEach>
         <!-- Pager -->
         <div class="clearfix">
-          <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
+	        <c:if test="${page.previousPageGroup }">
+	        	<c:choose>
+	        		<c:when test="${not empty param.category_no }">
+	        			<a class="btn btn-primary float-left" href="/${currentPageNum-1}?category_no=${param.category_no}">&larr; Newest Posts</a>
+	        		</c:when>
+	        		<c:otherwise>
+	        			<a class="btn btn-primary float-left" href="/${currentPageNum-1}">&larr; Newest Posts</a>
+	        		</c:otherwise>
+	        	</c:choose>
+	        </c:if>
+	        <c:if test="${page.nextPageGroup }">
+	        	<c:choose>
+	        		<c:when test="${not empty param.category_no }">
+	        			<a class="btn btn-primary float-right" href="/${currentPageNum+1}?category_no=${param.category_no}">Older Posts &rarr;</a>
+	        		</c:when>
+	        		<c:otherwise>
+	        			<a class="btn btn-primary float-right" href="/${currentPageNum+1}">Older Posts &rarr;</a>
+	        		</c:otherwise>
+	        	</c:choose>
+	        </c:if>
         </div>
       </div>
     </div>
@@ -114,7 +97,6 @@
 
   <!-- Custom scripts for this template -->
   <script src="/js/template/clean-blog.min.js"></script>
-
 </body>
 
 </html>

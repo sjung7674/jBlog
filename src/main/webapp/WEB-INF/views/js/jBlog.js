@@ -22,6 +22,7 @@ var jBlog = {
 		save : function(){
 			var category = $("#category").val();
 			var title = $("#title").val();
+			var sub_title = $("#sub_title").val();
 			var content_text = Global_Smart_Editor_Get_Content_For_Editor("ir1").replace("<p><br></p>","");
 			
 			if(!category){
@@ -39,13 +40,22 @@ var jBlog = {
 			}
 			var headers = {};
 			headers["X-CSRF-TOKEN"] = $("input[name=_csrf]").val();
+			var formData = new FormData(); 
+			formData.append("category",category);
+			formData.append("sub_title",sub_title);
+			formData.append("title",title);
+			formData.append("content",Global_Smart_Editor_Get_Content_For_Editor("ir1"));
+			if($("#inputGroupFile01")[0].files[0]){
+				formData.append("header_image_file",$("#inputGroupFile01")[0].files[0]);
+			}
 			$.ajax({
 					url : "/save",
 					type : "post",
-					data: {"category":category,"title":title, "content":Global_Smart_Editor_Get_Content_For_Editor("ir1")},
+					data: formData,
+					contentType: false,
+					processData: false,
 					headers : headers,
 					success : function(obj) {
-						console.log(obj);
 						var json_obj = $.parseJSON(obj);
 						var json_errors=json_obj.errors;
 						var json_success=json_obj.success;
@@ -79,4 +89,7 @@ function click_category(obj){
 	$("#category").val($(obj).data("value"));
 	
 	
+}
+function file_change(obj){
+	$(obj).next().text(obj.files[0].name);
 }

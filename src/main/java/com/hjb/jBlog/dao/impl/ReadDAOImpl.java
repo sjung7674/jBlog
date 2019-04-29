@@ -1,5 +1,7 @@
 package com.hjb.jBlog.dao.impl;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -18,6 +20,16 @@ public class ReadDAOImpl implements ReadDAO{
 	@Override
 	public PostDTO readPost(String idx) {
 		return sqlSession.selectOne("selectPostByIdx", idx);
+	}
+
+	@Override
+	public List postListNewest(Map<String,Object> m) {		
+		return  sqlSession.selectList("selectPostListNewest",m);
+	}
+
+	@Override
+	public int selectCountPostListNewest(String category_no) {
+		return sqlSession.selectOne("selectCountPostListNewest",category_no);
 	}
 
 }

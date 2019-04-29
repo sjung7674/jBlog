@@ -10,16 +10,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hjb.jBlog.dao.impl.ReadDAOImpl;
+import com.hjb.jBlog.service.impl.ViewServiceImpl;
 
 @Controller
 public class ViewController {
+	
 	@Autowired
-	ReadDAOImpl readDAO;
+	ViewServiceImpl viewService;
 	
 	@RequestMapping("/view/{idx}")
 	public ModelAndView view(@PathVariable String idx,HttpServletRequest request, HttpServletResponse response){
 		ModelAndView view = new ModelAndView();
-		view.addObject("post_dto", readDAO.readPost(idx));
+		System.out.println(viewService.selectViewByIdx(idx));
+		view.addObject("post_dto",viewService.selectViewByIdx(idx));
 		view.setViewName("view");
 		return view;
 	}

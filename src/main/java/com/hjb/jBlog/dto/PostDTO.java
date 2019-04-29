@@ -2,15 +2,19 @@ package com.hjb.jBlog.dto;
 
 import java.util.Date;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class PostDTO {
 	private int idx = -1;
 	private String userid = "";
 	private String category = "";
+	private String sub_title = "";
 	private String title = "";
 	private String content = "";
 	private Date reg_date = null;
 	private String user_image="";
-	
+	private String header_image="";
+	private MultipartFile header_image_file=null;
 	public int getIdx() {
 		return idx;
 	}
@@ -54,11 +58,33 @@ public class PostDTO {
 	public void setUser_image(String user_image) {
 		this.user_image = user_image;
 	}
+	
+	public String getHeader_image() {
+		return header_image;
+	}
+	public void setHeader_image(String header_image) {
+		this.header_image = header_image;
+	}
+	public MultipartFile getHeader_image_file() {
+		return header_image_file;
+	}
+	public void setHeader_image_file(MultipartFile header_image_file) {
+		this.header_image_file = header_image_file;
+	}
+	
+	public String getSub_title() {
+		return sub_title;
+	}
+	public void setSub_title(String sub_title) {
+		this.sub_title = sub_title;
+	}
 	@Override
 	public String toString() {
-		return "PostDTO [idx=" + idx + ", userid=" + userid + ", category=" + category + ", title=" + title
-				+ ", content=" + content + ", reg_date=" + reg_date + ", user_image=" + user_image + "]";
+		return "PostDTO [idx=" + idx + ", userid=" + userid + ", category=" + category + ", sub_title=" + sub_title
+				+ ", title=" + title + ", content=" + content + ", reg_date=" + reg_date + ", user_image=" + user_image
+				+ ", header_image=" + header_image + ", header_image_file=" + header_image_file + "]";
 	}
+	
 	
 	
 	

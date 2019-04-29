@@ -35,7 +35,7 @@
 	}
 
 	function File_Upload_Complete_Func(returnUrl){
-		var Set_HTML = "<img src=\"" + returnUrl + "\" />";
+		var Set_HTML = "<img class=\"img-fluid\" src=\"/getImg?imgName=" + returnUrl + "\" />";
 		var Target_Editor_Object_ID = window.location.hash.slice(1);
 		opener.GSE_Editors_Obj.getById[Target_Editor_Object_ID].exec("PASTE_HTML", [Set_HTML]);
 		self.close();

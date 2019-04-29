@@ -2,9 +2,26 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.hjb.jBlog.mapper.Post">
 	<insert id="insertPost" parameterType="PostDTO"> 
-		Insert into post (userid,category,title,content) values(#{userid},#{category},#{title},#{content})
+		Insert into post (userid,category,sub_title,title,content,header_image) values(#{userid},#{category},#{sub_title},#{title},#{content},#{header_image})
 	</insert>
 	<select id="selectPostByIdx" parameterType="String" resultType="PostDTO">
-		Select p.idx, p.userid, m.user_image, category, title, content, reg_date from post p inner join member m on p.userid=m.userid where p.idx=#{value}
+		SELECT p.idx, p.userid, m.user_image, p.category, title, content, header_image,  reg_date 
+		FROM post p INNER JOIN member m ON p.userid=m.userid   WHERE p.idx=#{value}
+	</select>
+	<select id="selectPostListNewest" parameterType="Map" resultType="PostDTO">
+		SELECT p.idx, p.userid, p.category, title, sub_title, reg_date 
+		FROM post p LEFT JOIN member m ON p.userid=m.userid
+		<if test="category_no!=null and category_no!='' ">
+			where p.category=#{category_no}
+		</if>
+		 ORDER BY reg_date DESC limit ${currentPageNum}, ${currentListRowCount}
+	</select>
+	<select id="selectCountPostListNewest" resultType="int" parameterType="String">
+		SELECT count(*)
+		FROM post p LEFT JOIN member m ON p.userid=m.userid 
+		<if test="value!=null and value!='' ">
+			where p.category=#{value}
+		</if>
+		ORDER BY reg_date DESC
 	</select>
 </mapper>

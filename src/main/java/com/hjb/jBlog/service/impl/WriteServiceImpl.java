@@ -50,15 +50,17 @@ public class WriteServiceImpl implements WriteService,CategoryService{
 						String fileName = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date())+"."+fileExt;
 						String dir = "D:"+File.separator+"upload";
 						fu.uploadFileJGPB(mpf, fileName, dir);
-						result="/getImg?imgName="+fileName;
+						result=fileName;
 					}catch(IOException e){
 						e.printStackTrace();
+						result="error";
 					}
 				}else{
 					result="not_JGPBImage";
 				}
 			}catch(IOException e){
 				e.printStackTrace();
+				result="error";
 			}
 		}
 		return result;
@@ -89,16 +91,35 @@ public class WriteServiceImpl implements WriteService,CategoryService{
 			
 			result_map.put("errors", obj_list);
         }else{
-        	if(writeDao.insertPost(postDTO)==1){
-        		HashMap<String,String> success = new HashMap<String,String>();
-        		success.put("message", "입력 되었습니다.");
-        		obj_list.add(success);
-    			result_map.put("errors", obj_list);
-        	}else{
-        		HashMap<String,String> error = new HashMap<String,String>();
-    			error.put("message", "오류가 발생하였습니다.");
+        	String ret="";
+        	if(postDTO.getHeader_image_file()!=null){
+        		ret=FileUploadService(postDTO.getHeader_image_file());
+        	}
+        	HashMap<String,String> error = new HashMap<String,String>();
+        	if(ret.equals("over_size")){
+    			error.put("message", "이미지는 10MB 까지 업로드 가능합니다.");
     			obj_list.add(error);
     			result_map.put("errors", obj_list);
+        	}else if(ret.equals("not_JGPBImage")){
+        		error.put("message", "이미지는 jpg,gif,png,bmp 만 업로드 가능합니다.");
+    			obj_list.add(error);
+    			result_map.put("errors", obj_list);
+        	}else if(ret.equals("error")){
+        		error.put("message", "이미지업로드 오류가 발생하였습니다.");
+    			obj_list.add(error);
+    			result_map.put("errors", obj_list);
+        	}else{
+        		postDTO.setHeader_image(ret);
+        		if(writeDao.insertPost(postDTO)==1){
+            		HashMap<String,String> success = new HashMap<String,String>();
+            		success.put("message", "입력 되었습니다.");
+            		obj_list.add(success);
+        			result_map.put("success", obj_list);
+            	}else{
+        			error.put("message", "오류가 발생하였습니다.");
+        			obj_list.add(error);
+        			result_map.put("errors", obj_list);
+            	}
         	}
         	
         }
