@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -34,8 +35,19 @@
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="site-heading">
-            <h1>Clean Blog</h1>
-            <span class="subheading">A Blog Theme by Start Bootstrap</span>
+          	<c:choose>
+		  		<c:when test="${not empty param.category_no }">
+		  			<c:forEach items="${categoryList }"  var="list">
+		  				<c:if test="${list.idx== param.category_no }">
+		  					<h1>${list.category }</h1>
+		  				</c:if>
+		        	</c:forEach>
+		  		</c:when>
+		  		<c:otherwise>
+		  			<h1>Clean Blog</h1>
+        			 <span class="subheading">A Blog Theme by Start Bootstrap</span>
+		  		</c:otherwise>
+		  	</c:choose>
           </div>
         </div>
       </div>
@@ -88,7 +100,6 @@
       </div>
     </div>
   </div>
-
   <hr>
 <jsp:include page="include/footer.jsp"/>
   <!-- Bootstrap core JavaScript -->

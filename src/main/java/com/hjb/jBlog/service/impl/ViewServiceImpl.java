@@ -5,9 +5,12 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.hjb.jBlog.dao.impl.ReadDAOImpl;
+import com.hjb.jBlog.dto.MemberDTO;
 import com.hjb.jBlog.dto.PostDTO;
 import com.hjb.jBlog.service.ViewService;
 
@@ -29,6 +32,15 @@ public class ViewServiceImpl implements ViewService{
 	@Override
 	public int selectCountPostListNewest(String category_no) {
 		return readDAO.selectCountPostListNewest(category_no);
+	}
+	@Override
+	public PostDTO selectViewByIdxAndUserId(String idx) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication(); 
+		MemberDTO user = (MemberDTO) authentication.getPrincipal();
+		PostDTO postDTO = new PostDTO();
+		postDTO.setIdx(Integer.parseInt(idx));
+		postDTO.setUserid(user.getUsername());
+		return readDAO.selectViewByIdxAndUserId(postDTO);
 	}
 	
 	

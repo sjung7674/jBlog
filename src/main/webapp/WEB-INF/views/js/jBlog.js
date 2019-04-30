@@ -70,6 +70,73 @@ var jBlog = {
 								message+=json_success[i].message+"\n";
 							}
 							alert(message);
+							location.href="/";
+						}
+						
+					},
+					error: function(){
+						alert("오류가 발생하였습니다.");
+					}
+			});
+		},
+		update : function(){
+			var category = $("#category").val();
+			var title = $("#title").val();
+			var sub_title = $("#sub_title").val();
+			var content_text = Global_Smart_Editor_Get_Content_For_Editor("ir1").replace("<p><br></p>","");
+			var idx = $("#idx").val();
+			
+			if(!category){
+				alert('카테고리를 선택해주세요');
+				$("#category").focus();
+				return;
+			}else if(!title){
+				alert('제목을 입력해주세요');
+				$("#title").focus();
+				return;
+			}else if(!content_text){
+				alert('내용을 입력해주세요');
+				$("#ir1").focus();
+				return;
+			}else if(!idx){
+				alert('오류가 발생하였습니다. 다시 시도해 주세요');
+				location.reload();
+				return;
+			}
+			var headers = {};
+			headers["X-CSRF-TOKEN"] = $("input[name=_csrf]").val();
+			var formData = new FormData(); 
+			formData.append("category",category);
+			formData.append("sub_title",sub_title);
+			formData.append("title",title);
+			formData.append("content",Global_Smart_Editor_Get_Content_For_Editor("ir1"));
+			formData.append("idx",idx);
+			if($("#inputGroupFile01")[0].files[0]){
+				formData.append("header_image_file",$("#inputGroupFile01")[0].files[0]);
+			}
+			$.ajax({
+					url : "/update",
+					type : "post",
+					data: formData,
+					contentType: false,
+					processData: false,
+					headers : headers,
+					success : function(obj) {
+						var json_obj = $.parseJSON(obj);
+						var json_errors=json_obj.errors;
+						var json_success=json_obj.success;
+						var message="";
+						if(json_errors){
+							for(var i in json_errors){
+								message+=json_errors[i].message+"\n";
+							}
+							alert(message);
+						}else if(json_success){
+							for(var i in json_success){
+								message+=json_success[i].message+"\n";
+							}
+							alert(message);
+							location.href="/";
 						}
 						
 					},
@@ -91,5 +158,11 @@ function click_category(obj){
 	
 }
 function file_change(obj){
+	var reader = new FileReader();
+    reader.onload = function(e) {
+        $('#thumbnail').attr('src', e.target.result);
+    }
+    reader.readAsDataURL(obj.files[0]);
+    
 	$(obj).next().text(obj.files[0].name);
 }

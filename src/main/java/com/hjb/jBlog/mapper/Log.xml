@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hjb.jBlog.mapper.Log">
+	<insert id="insertLog" parameterType="LogDTO"> 
+		INSERT INTO 
+		visit_stat_all (year_,month_,date_,hour_,week_,userip,userid,usertype,fname,lname,NAME,param,title,prepage,regdate,device) 
+		VALUES (#{year_},#{month_},#{date_},#{hour_},#{week_},#{userip},#{userid},#{usertype},#{fname},#{lname},#{name},#{param},#{title},#{prepage},NOW(),#{device}); 
+	</insert>
+</mapper>

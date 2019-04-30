@@ -9,4 +9,6 @@ public interface WriteService {
 
 	public String FileUploadService(MultipartFile mpf);
 	public String insertPost(PostDTO postDTO,BindingResult bindingResult);
+	public String updatePost(PostDTO postDTO,BindingResult bindingResult);
+	public void removePost(PostDTO postDTO);
 }

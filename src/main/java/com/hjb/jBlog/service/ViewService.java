@@ -9,4 +9,5 @@ public interface ViewService {
 	public PostDTO selectViewByIdx(String idx);
 	public ArrayList<PostDTO> postList(Map<String,Object> m);
 	public int selectCountPostListNewest(String category_no);
+	public PostDTO selectViewByIdxAndUserId(String m);
 }

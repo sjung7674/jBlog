@@ -37,12 +37,12 @@
 		        	</c:forEach>
 				  </div>
           </li>
-          <sec:authorize access="isAnonymous()">
+          <sec:authorize access="!hasRole('ROLE_USER')">
 			<li class="nav-item">
 				<a class="nav-link" href="/member/login">Login</a>
 			</li>
 		  </sec:authorize>
-		  <sec:authorize access="isAuthenticated()">
+		  <sec:authorize access="hasRole('ROLE_USER')">
 			<li class="nav-item">
 				<a class="nav-link" href="/member/logout">Logout</a>
 			</li>

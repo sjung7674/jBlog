@@ -18,4 +18,12 @@ public class WriteDAOImpl implements WriteDAO{
 		return sqlSession.insert("insertPost",postDTO);
 	}
 
+	@Override
+	public int updatePost(PostDTO postDTO) {
+		return sqlSession.update("updatePost", postDTO);
+	}
+	@Override
+	public int deletePost(PostDTO postDTO) {
+		return sqlSession.update("deletePost", postDTO);
+	}
 }

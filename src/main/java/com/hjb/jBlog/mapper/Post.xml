@@ -4,8 +4,14 @@
 	<insert id="insertPost" parameterType="PostDTO"> 
 		Insert into post (userid,category,sub_title,title,content,header_image) values(#{userid},#{category},#{sub_title},#{title},#{content},#{header_image})
 	</insert>
+	<insert id="updatePost" parameterType="PostDTO"> 
+		update post set category=#{category}, title=#{title}, sub_title=#{sub_title}, content=#{content},header_image=#{header_image}  where idx=#{idx} and userid=#{userid}
+	</insert>
+	<insert id="deletePost" parameterType="PostDTO"> 
+		delete from post where idx=#{idx} and userid=#{userid}
+	</insert>
 	<select id="selectPostByIdx" parameterType="String" resultType="PostDTO">
-		SELECT p.idx, p.userid, m.user_image, p.category, title, content, header_image,  reg_date 
+		SELECT p.idx, p.userid, m.user_image, p.category,sub_title, title, content, header_image,  reg_date 
 		FROM post p INNER JOIN member m ON p.userid=m.userid   WHERE p.idx=#{value}
 	</select>
 	<select id="selectPostListNewest" parameterType="Map" resultType="PostDTO">
@@ -23,5 +29,9 @@
 			where p.category=#{value}
 		</if>
 		ORDER BY reg_date DESC
+	</select>
+	<select id="selectViewByIdxAndUserId" resultType="postDTO" parameterType="postDTO">
+		SELECT p.idx, p.userid, m.user_image, p.category,sub_title, title, content, header_image,  reg_date 
+		FROM post p INNER JOIN member m ON p.userid=m.userid   WHERE p.idx=#{idx} AND p.userid=#{userid}
 	</select>
 </mapper>

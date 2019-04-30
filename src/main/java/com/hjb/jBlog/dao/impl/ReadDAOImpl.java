@@ -32,4 +32,9 @@ public class ReadDAOImpl implements ReadDAO{
 		return sqlSession.selectOne("selectCountPostListNewest",category_no);
 	}
 
+	@Override
+	public PostDTO selectViewByIdxAndUserId(PostDTO postDTO) {
+		return sqlSession.selectOne("selectViewByIdxAndUserId",postDTO);
+	}
+
 }

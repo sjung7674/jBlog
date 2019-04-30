@@ -8,11 +8,14 @@
 
 	<typeAliases>
         <package name="com.hjb.jBlog.dto"/>
+        <package name="com.hjb.jBlog.admin.dto"/>
     </typeAliases>
     <mappers>
+    	<mapper resource="com/hjb/jBlog/admin/mapper/AdminMember.xml"></mapper>
         <mapper resource="com/hjb/jBlog/mapper/Member.xml"></mapper>
         <mapper resource="com/hjb/jBlog/mapper/Post.xml"></mapper>
         <mapper resource="com/hjb/jBlog/mapper/Category.xml"></mapper>
+        <mapper resource="com/hjb/jBlog/mapper/Log.xml"></mapper>
     </mappers>
 
 </configuration>
