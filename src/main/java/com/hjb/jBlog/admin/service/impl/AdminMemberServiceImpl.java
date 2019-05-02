@@ -1,4 +1,4 @@
-package com.hjb.jBlog.admin.service;
+package com.hjb.jBlog.admin.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

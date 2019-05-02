@@ -37,4 +37,9 @@ public class ReadDAOImpl implements ReadDAO{
 		return sqlSession.selectOne("selectViewByIdxAndUserId",postDTO);
 	}
 
+	@Override
+	public int updateReadCnt(String str) {
+		return sqlSession.update("updateReadCnt",str);
+	}
+	
 }

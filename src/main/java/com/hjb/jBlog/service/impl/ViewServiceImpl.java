@@ -22,6 +22,7 @@ public class ViewServiceImpl implements ViewService{
 	@Override
 	public PostDTO selectViewByIdx(String idx) {
 		PostDTO dto = readDAO.readPost(idx);
+		readDAO.updateReadCnt(idx);
 		dto.setContent(StringEscapeUtils.unescapeHtml4(dto.getContent()));
 		return dto;
 	}

@@ -80,7 +80,7 @@
 			    </label>
 			  </div>
 			</div>
-				<img src="/getImg?imgName=${post_dto.header_image }" id="thumbnail" class="img-thumbnail" width="20%">
+				<img src="/getImg?imgName=${post_dto.header_image }" id="thumbnail" class="img-thumbnail" width="20%" onerror="this.src='/img/thumbnail_error.jpg'" onclick="imgclick();">
 	    </div><!-- /.col-lg-6 -->
   		<textarea name="ir1" id="ir1" rows="10" cols="100">${post_dto.content }</textarea>
   		<div class="btn-group btn-group-sm float-right" role="group" aria-label="submit_or_cancel">
@@ -117,7 +117,10 @@ var Editor_Obj_ID = "";
 $(document).ready(function () {
 	Editor_Obj_ID = Global_Create_Smart_Editor("ir1");
 });
-
+function imgclick(){
+	$("input[type=file]").trigger("click");
+	
+}
 </script>
 </body>
 

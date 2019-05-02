@@ -34,4 +34,7 @@
 		SELECT p.idx, p.userid, m.user_image, p.category,sub_title, title, content, header_image,  reg_date 
 		FROM post p INNER JOIN member m ON p.userid=m.userid   WHERE p.idx=#{idx} AND p.userid=#{userid}
 	</select>
+	<update id="updateReadCnt" parameterType="String">
+		update post set read_cnt = read_cnt+1 where idx=#{value}
+	</update>
 </mapper>

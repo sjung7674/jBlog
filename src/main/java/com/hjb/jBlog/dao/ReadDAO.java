@@ -11,4 +11,5 @@ public interface ReadDAO {
 	public List postListNewest(Map<String,Object> m);
 	public int selectCountPostListNewest(String category_no);
 	public PostDTO selectViewByIdxAndUserId(PostDTO postDTO);
+	public int updateReadCnt(String str);
 }

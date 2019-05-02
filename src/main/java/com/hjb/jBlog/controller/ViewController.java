@@ -21,7 +21,6 @@ public class ViewController {
 	@RequestMapping("/view/{idx}")
 	public ModelAndView view(@PathVariable String idx,HttpServletRequest request, HttpServletResponse response){
 		ModelAndView view = new ModelAndView();
-		System.out.println(viewService.selectViewByIdx(idx));
 		view.addObject("post_dto",viewService.selectViewByIdx(idx));
 		view.setViewName("view");
 		return view;

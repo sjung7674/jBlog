@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hjb.jBlog.mapper.AdminDashBoard">
+	<select id="selectAccessCnt" resultType="HashMap"> 
+		SELECT DATE(regdate)AS `date`,COUNT(*) AS `count`
+		FROM visit_stat_all 
+		WHERE regdate BETWEEN DATE_SUB(NOW(), INTERVAL 1 MONTH) AND NOW() GROUP BY DATE(regdate) ORDER BY DATE DESC
+	</select>
+	<select id="selectDeviceCnt" resultType="HashMap"> 
+		SELECT device,COUNT(*) as `count` FROM visit_stat_all GROUP BY device
+	</select>
+</mapper>

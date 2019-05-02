@@ -60,7 +60,7 @@ public class SiteControlInterceptor extends HandlerInterceptorAdapter{
 		logDto.setWeek_(now.get(Calendar.DAY_OF_WEEK));
 		logDto.setHour_(now.get(Calendar.HOUR_OF_DAY));
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication(); 
-		if(authentication.getPrincipal() instanceof MemberDTO){
+		if(authentication!=null && authentication.getPrincipal() instanceof MemberDTO){
 			MemberDTO user = (MemberDTO) authentication.getPrincipal();
 			logDto.setUserid(user.getUsername());
 			logDto.setUsertype("1");
