@@ -14,7 +14,7 @@
     <div class="row">
       <div class="col mx-auto" style="max-width:500px">
       	<form class="form-signin" action="/admin/login" method="post">
-	  		<h2 class="form-signin-heading">Login</h2>
+	  		<h2 class="form-signin-heading">jBlog Login</h2>
 			<label for="inputEmail" class="sr-only">ID</label>
 			<input type="text" id="admin_id" name = "admin_id" class="form-control mb-1" placeholder="ID" required="" autofocus="">
 			<label for="inputPassword" class="sr-only">Password</label>

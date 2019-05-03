@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hjb.jBlog.service.WriteService;
+import com.hjb.jBlog.service.impl.HeaderServiceImpl;
 import com.hjb.jBlog.service.impl.ViewServiceImpl;
 import com.hjb.jBlog.service.impl.WriteServiceImpl;
 import com.hjb.jBlog.util.PagingBean;
@@ -33,6 +34,8 @@ import com.hjb.jBlog.util.PagingBean;
 public class HomeController {
 	@Autowired
 	ViewServiceImpl viewService;
+	@Autowired
+	HeaderServiceImpl headerService;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home_redirect(HttpServletRequest request ) {
@@ -50,13 +53,13 @@ public class HomeController {
 			m.put("currentListRowCount", purchaserPage.getItemsPerPage());
 			m.put("category_no", category_no);
 			List list =  viewService.postList(m);
-			System.out.println(list);
 			if(list.size()==0){
 				view.setViewName("redirect:/1");
 			}else{
 				view.addObject("page",purchaserPage);
 				view.addObject("currentPageNum",currentPageNum);
 				view.addObject("post_list",list);
+				view.addObject("main_header", headerService.selectMainHeader());
 				view.setViewName("index");
 			}
 		}catch(NumberFormatException e){

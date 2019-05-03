@@ -29,7 +29,7 @@
 <body>
 <jsp:include page="include/nav.jsp"/>
   <!-- Page Header -->
-  <header class="masthead" style="background-image: url('/img/home-bg.jpg')">
+  <header class="masthead" style="background-image: url('/getImg?imgName=${main_header.header_image }')">
     <div class="overlay"></div>
     <div class="container">
       <div class="row">
@@ -44,8 +44,8 @@
 		        	</c:forEach>
 		  		</c:when>
 		  		<c:otherwise>
-		  			<h1>Clean Blog</h1>
-        			 <span class="subheading">A Blog Theme by Start Bootstrap</span>
+		  			<h1>${main_header.title }</h1>
+        			 <span class="subheading">${main_header.sub_title }</span>
 		  		</c:otherwise>
 		  	</c:choose>
           </div>

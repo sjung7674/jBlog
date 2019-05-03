@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hjb.jBlog.admin.mapper.AdminHeader">
+	<insert id="insertMainHeader" parameterType="HashMap">
+	insert into main_header(title,sub_title,header_image) values (#{title},#{sub_title},#{header_image})
+	</insert>
+	<select id="selectMainHeader" resultType="HashMap">
+	select title,sub_title,header_image from main_header order by reg_date desc limit 1
+	</select>
+</mapper>
