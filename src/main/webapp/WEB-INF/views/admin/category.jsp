@@ -86,7 +86,27 @@
             <h1 class="h3 mb-0 text-gray-800">Category</h1>
           </div>
           <div class="row">
-          	
+       		<div class="card" style="width: 18rem;">
+			  <img src="" class="card-img-top" alt="header_image" onerror="this.src='/img/thumbnail_error.jpg'">
+			  <div class="card-body text-center">
+			    <p class="card-text"><input type="text" name="category_text"/></p>
+				 <a href="#" class="btn btn-outline-primary btn-sm">저장</a>
+			  </div>
+			</div>
+			<div id="list_div">
+				<c:forEach items="${category_list }" var="list">
+          		<div class="card" style="width: 18rem;">
+				  <img src="${list.header_image }" class="card-img-top" alt="header_image" onerror="this.src='/img/thumbnail_error.jpg'">
+				  <div class="card-body text-center">
+				    <p class="card-text"><input type="text" name="category_text" value="${list.category }"/></p>
+				    <div class="btn-group" role="group">
+				     	<a href="javascript:;" class="btn btn-outline-primary btn-sm" onclick="">수정</a>
+				     	<a href="javascript:;" class="btn btn-outline-danger btn-sm" onclick="">삭제</a>
+					</div>
+				  </div>
+				</div>
+          		</c:forEach>
+			</div>
           </div>
 		</div>
       </div>
