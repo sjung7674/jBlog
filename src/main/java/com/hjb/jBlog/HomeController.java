@@ -23,9 +23,9 @@ import com.hjb.jBlog.util.PagingBean;
 @Controller
 public class HomeController {
 	@Autowired
-	ViewService viewService;
+	private ViewService viewService;
 	@Autowired
-	HeaderServiceImpl headerService;
+	private HeaderServiceImpl headerService;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home_redirect(HttpServletRequest request ) {
@@ -43,15 +43,11 @@ public class HomeController {
 			m.put("currentListRowCount", purchaserPage.getItemsPerPage());
 			m.put("category_no", category_no);
 			List list =  viewService.postList(m);
-			if(list.size()==0){
-				view.setViewName("redirect:/1");
-			}else{
-				view.addObject("page",purchaserPage);
-				view.addObject("currentPageNum",currentPageNum);
-				view.addObject("post_list",list);
-				view.addObject("main_header", headerService.selectMainHeader());
-				view.setViewName("index");
-			}
+			view.addObject("page",purchaserPage);
+			view.addObject("currentPageNum",currentPageNum);
+			view.addObject("post_list",list);
+			view.addObject("main_header", headerService.selectMainHeader());
+			view.setViewName("index");
 		}catch(NumberFormatException e){
 			e.printStackTrace();
 			view.setViewName("redirect:/1");

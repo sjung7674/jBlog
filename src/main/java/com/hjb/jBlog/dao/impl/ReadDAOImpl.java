@@ -15,7 +15,7 @@ import com.hjb.jBlog.dto.PostDTO;
 public class ReadDAOImpl implements ReadDAO{
 	
 	@Autowired
-	SqlSession sqlSession;
+	private SqlSession sqlSession;
 	
 	@Override
 	public PostDTO readPost(String idx) {

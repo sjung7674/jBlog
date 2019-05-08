@@ -9,7 +9,7 @@ import com.hjb.jBlog.dto.LogDTO;
 @Repository
 public class LogDAOImpl {
 	@Autowired
-	SqlSession sqlSession;
+	private SqlSession sqlSession;
 	
 	public int insertLog(LogDTO logDTO){
 		return sqlSession.insert("insertLog", logDTO);

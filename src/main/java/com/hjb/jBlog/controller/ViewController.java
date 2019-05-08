@@ -16,7 +16,7 @@ import com.hjb.jBlog.service.impl.ViewServiceImpl;
 public class ViewController {
 	
 	@Autowired
-	ViewServiceImpl viewService;
+	private ViewServiceImpl viewService;
 	
 	@RequestMapping("/view/{idx}")
 	public ModelAndView view(@PathVariable String idx,HttpServletRequest request, HttpServletResponse response){

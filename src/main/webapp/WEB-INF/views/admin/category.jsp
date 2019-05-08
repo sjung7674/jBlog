@@ -87,16 +87,16 @@
           </div>
           <div class="row">
        		<div class="card" style="width: 18rem;">
-			  <img src="" class="card-img-top" alt="header_image" onerror="this.src='/img/thumbnail_error.jpg'">
+			  <img src="" class="card-img-top" alt="header_image" onerror="this.src='/img/thumbnail_error.jpg'" onclick="img_click();" id="img_preview">
+			  <input type="file" name="header_image" onchange="img_change();" style="display:none;"/>
 			  <div class="card-body text-center">
-			    <p class="card-text"><input type="text" name="category_text"/></p>
-				 <a href="#" class="btn btn-outline-primary btn-sm">저장</a>
+			    <p class="card-text"><input type="text" name="category_text" id="category_text"/></p>
+				 <a href="javascript:;" class="btn btn-outline-primary btn-sm" onclick="save();">저장</a>
 			  </div>
 			</div>
-			<div id="list_div">
-				<c:forEach items="${category_list }" var="list">
-          		<div class="card" style="width: 18rem;">
-				  <img src="${list.header_image }" class="card-img-top" alt="header_image" onerror="this.src='/img/thumbnail_error.jpg'">
+			<c:forEach items="${category_list }" var="list">
+         		<div class="card" style="width: 18rem;">
+				  <img src="/getImg?imgName=${list.header_image_name }&path=category" class="card-img-top" alt="header_image" onerror="this.src='/img/thumbnail_error.jpg'">
 				  <div class="card-body text-center">
 				    <p class="card-text"><input type="text" name="category_text" value="${list.category }"/></p>
 				    <div class="btn-group" role="group">
@@ -105,8 +105,7 @@
 					</div>
 				  </div>
 				</div>
-          		</c:forEach>
-			</div>
+       		</c:forEach>
           </div>
 		</div>
       </div>
@@ -128,41 +127,36 @@
   <!-- Custom scripts for all pages-->
   <script src="/admin/js/sb-admin-2.min.js"></script>
 <script type="text/javascript">
-function binding_text(obj){
-	if(obj.id=='title'){
-		$("#title_main").text(obj.value);
-	}else if(obj.id=='sub_title'){
-		$("#subtitle_main").text(obj.value);
-	}
+function img_click(){
+	$("input[name=header_image]").trigger("click");
 }
-function file_change(obj){
+function img_change(){
 	var reader = new FileReader();
     reader.onload = function(e) {
-        $('#header_image').css('background-image', "url('"+e.target.result+"')");
+        $('#img_preview').prop("src", e.target.result);
     }
-    reader.readAsDataURL(obj.files[0]);
-    
-	$(obj).next().text(obj.files[0].name);
+    reader.readAsDataURL($("input[name=header_image]")[0].files[0]);
 }
 function save(){
-	var title = $("#title").val();
-	var sub_title = $("#sub_title").val();
-	if(!title){
-		alert('제목을 입력해주세요');
-		$("#title").focus();
+	var img =$("input[name=header_image]")[0].files[0];
+	var category_text = $("input[name=category_text]").val();
+	if(!img){
+		alert('이미지를 선택해주세요.');
+		$("input[name=header_image]").focus();
 		return;
 	}
-	
+	if(!category_text){
+		alert('카테고리명을 입력해주세요');
+		$("input[name=category_text]").focus();
+		return;
+	}
 	var headers = {};
 	headers["X-CSRF-TOKEN"] = $("input[name=_csrf]").val();
 	var formData = new FormData(); 
-	formData.append("sub_title",sub_title);
-	formData.append("title",title);
-	if($("#inputGroupFile01")[0].files[0]){
-		formData.append("header_image_file",$("#inputGroupFile01")[0].files[0]);
-	}
+	formData.append("header_image",img);
+	formData.append("category",category_text);
 	$.ajax({
-		url : "/admin/saveMainHeader",
+		url : "/admin/category/save",
 		type : "post",
 		data: formData,
 		contentType: false,
@@ -171,6 +165,13 @@ function save(){
 		success : function(result) {
 			if(result=='success'){
 				alert("저장하였습니다.");
+				
+			}else if(result=='over_size'){
+				alert("사진은 10MB이하로 업로드하세요.");
+			}else if(result=='not_JGPBImage'){
+				alert("사진은 jpg,gif,png,bmp로 업로드하세요.");
+			}else if(result=='error'){
+				alert("오류가 발생하였습니다.");
 			}
 		},
 		error: function(){

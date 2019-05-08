@@ -11,7 +11,7 @@ import com.hjb.jBlog.dto.PostDTO;
 public class WriteDAOImpl implements WriteDAO{
 
 	@Autowired
-	SqlSession sqlSession;
+	private SqlSession sqlSession;
 	
 	@Override
 	public int insertPost(PostDTO postDTO) {

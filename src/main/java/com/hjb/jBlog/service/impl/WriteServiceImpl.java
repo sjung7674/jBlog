@@ -22,6 +22,7 @@ import com.google.gson.Gson;
 import com.hjb.jBlog.dao.impl.CategoryDAOImpl;
 import com.hjb.jBlog.dao.impl.ReadDAOImpl;
 import com.hjb.jBlog.dao.impl.WriteDAOImpl;
+import com.hjb.jBlog.dto.CategoryDTO;
 import com.hjb.jBlog.dto.MemberDTO;
 import com.hjb.jBlog.dto.PostDTO;
 import com.hjb.jBlog.service.CategoryService;
@@ -33,11 +34,11 @@ import com.hjb.jBlog.validator.PostValidator;
 public class WriteServiceImpl implements WriteService,CategoryService{
 	
 	@Autowired
-	WriteDAOImpl writeDao;
+	private WriteDAOImpl writeDao;
 	@Autowired
-	CategoryDAOImpl categoryDao;
+	private CategoryDAOImpl categoryDao;
 	@Autowired
-	ReadDAOImpl readDAO;
+	private ReadDAOImpl readDAO;
 	
 	@Override
 	public String FileUploadService(MultipartFile mpf) {
@@ -49,16 +50,11 @@ public class WriteServiceImpl implements WriteService,CategoryService{
 		}else{
 			try{
 				if(fu.isJGPBImage(mpf)){
-					try{
-						String fileExt = orgFileName.substring(orgFileName.lastIndexOf(".")+1, orgFileName.length());
-						String fileName = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date())+"."+fileExt;
-						String dir = "D:"+File.separator+"upload";
-						fu.uploadFileJGPB(mpf, fileName, dir);
-						result=fileName;
-					}catch(IOException e){
-						e.printStackTrace();
-						result="error";
-					}
+					String fileExt = orgFileName.substring(orgFileName.lastIndexOf(".")+1, orgFileName.length());
+					String fileName = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date())+"."+fileExt;
+					String dir = "D:"+File.separator+"upload";
+					fu.uploadFileJGPB(mpf, fileName, dir);
+					result=fileName;
 				}else{
 					result="not_JGPBImage";
 				}
@@ -132,7 +128,8 @@ public class WriteServiceImpl implements WriteService,CategoryService{
 	}
 
 	@Override
-	public List<Map<String, String>> getCategory() {
+	public List<CategoryDTO> getCategory() {
+		
 		return categoryDao.selectCategory();
 	}
 

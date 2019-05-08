@@ -23,9 +23,9 @@ import com.hjb.jBlog.service.impl.WriteServiceImpl;
 
 public class SiteControlInterceptor extends HandlerInterceptorAdapter{
 	@Autowired
-	WriteServiceImpl writeService;
+	private WriteServiceImpl writeService;
 	@Autowired
-	LogDAOImpl logDAO;
+	private LogDAOImpl logDAO;
 	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)

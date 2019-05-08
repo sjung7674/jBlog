@@ -16,7 +16,7 @@ import com.hjb.jBlog.admin.service.impl.AdminHeaderServiceImpl;
 @RequestMapping("/admin")
 public class AdminHeaderController {
 	@Autowired
-	AdminHeaderServiceImpl adminHeaderService;
+	private AdminHeaderServiceImpl adminHeaderService;
 	
 	@RequestMapping("/mainHeader")
 	public ModelAndView mainHeaderModify(HttpServletRequest request){

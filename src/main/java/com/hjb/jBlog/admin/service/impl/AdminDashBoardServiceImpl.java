@@ -12,7 +12,7 @@ import com.hjb.jBlog.admin.dao.impl.AdminDashBoardDAOImpl;
 @Service
 public class AdminDashBoardServiceImpl {
 	@Autowired
-	public AdminDashBoardDAOImpl adminDashBoard;
+	private AdminDashBoardDAOImpl adminDashBoard;
 	
 	public void selectAccessCnt(List<String> label, List<String> data){
 		List<Map<String,String>> list = adminDashBoard.selectAccessCnt();

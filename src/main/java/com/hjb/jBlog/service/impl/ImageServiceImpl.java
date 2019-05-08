@@ -11,9 +11,12 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ImageServiceImpl {
-	public String getImage(String imgName, ServletOutputStream out) throws IOException{
+	public String getImage(String imgName,String path, ServletOutputStream out) throws IOException{
 		String ext      = imgName.substring(imgName.lastIndexOf(".")+1);
 		String realFolder = "D:"+File.separator+"upload";
+		if(!path.equals("")){
+			realFolder = realFolder + File.separator + path;
+		}
 		BufferedImage bi = null;
 		File file = new File(realFolder +File.separator+ imgName);
 		String contentType="";

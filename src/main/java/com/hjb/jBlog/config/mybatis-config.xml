@@ -14,6 +14,7 @@
     	<mapper resource="com/hjb/jBlog/admin/mapper/AdminMember.xml"></mapper>
     	<mapper resource="com/hjb/jBlog/admin/mapper/AdminDashBoard.xml"></mapper>
     	<mapper resource="com/hjb/jBlog/admin/mapper/AdminHeader.xml"></mapper>
+    	<mapper resource="com/hjb/jBlog/admin/mapper/AdminCategory.xml"></mapper>
         <mapper resource="com/hjb/jBlog/mapper/Member.xml"></mapper>
         <mapper resource="com/hjb/jBlog/mapper/Post.xml"></mapper>
         <mapper resource="com/hjb/jBlog/mapper/Category.xml"></mapper>

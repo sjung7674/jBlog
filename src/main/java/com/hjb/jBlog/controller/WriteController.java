@@ -90,12 +90,13 @@ public class WriteController {
 	@ResponseBody
 	public void getImg(HttpServletRequest request , HttpServletResponse response) throws IOException{
 		String imgName = request.getParameter("imgName")==null?"":request.getParameter("imgName");
+		String path = request.getParameter("path")==null?"":request.getParameter("path");
 		ServletOutputStream out= null;
 		String contentType="";
 		try
 		{
 			out = response.getOutputStream();
-			contentType = imageService.getImage(imgName, out);
+			contentType = imageService.getImage(imgName,path, out);
 			response.setContentType(contentType);
 		}catch(Exception e){
 			e.printStackTrace();
