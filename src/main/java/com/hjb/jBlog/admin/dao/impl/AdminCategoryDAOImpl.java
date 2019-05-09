@@ -19,15 +19,18 @@ public class AdminCategoryDAOImpl implements AdminCategoryDAO{
 	}
 
 	@Override
-	public int modifyCategory(HashMap<String, String> map) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int modifyCategory(CategoryDTO dto) {
+		return sqlSession.update("updateCategory", dto);
 	}
 
 	@Override
-	public int deleteCategory(HashMap<String, String> map) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int deleteCategory(CategoryDTO dto) {
+		return sqlSession.delete("deleteCategory",dto);
+	}
+
+	@Override
+	public CategoryDTO selectCategoryByIdx(CategoryDTO dto) {
+		return sqlSession.selectOne("selectCategoryByIdx", dto);
 	}
 	
 

@@ -10,7 +10,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>jBlog Admin - Category</title>
+  <title>jBlog Admin - Member</title>
 
   <!-- Custom fonts for this template-->
   <link href="/admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -18,7 +18,7 @@
 
   <!-- Custom styles for this template-->
   <link href="/admin/css/sb-admin-2.css" rel="stylesheet"> 
-
+	<link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 </head>
 
 <body id="page-top">
@@ -82,33 +82,40 @@
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Category</h1>
-          </div>
-          <div class="row">
-       		<div class="card" style="width: 18rem;">
-			  <img src="" class="card-img-top" alt="header_image" onerror="this.src='/img/thumbnail_error.jpg'" onclick="img_click(this);" id="img_preview">
-			  <input type="file" name="header_image" onchange="img_change(this);" style="display:none;"/>
-			  <div class="card-body text-center">
-			    <p class="card-text">
-			    	<input type="text" name="category_text" id="category_text"/>
-			    </p>
-				 <a href="javascript:;" class="btn btn-outline-primary btn-sm" onclick="save(this);">저장</a>
-			  </div>
-			</div>
-			<c:forEach items="${category_list }" var="list">
-         		<div class="card" style="width: 18rem;">
-				  <img src="/getImg?imgName=${list.header_image_name }&path=category" class="card-img-top" alt="header_image" onclick="img_click(this);" onerror="this.src='/img/thumbnail_error.jpg'">
-				  <input type="file" name="header_image" onchange="img_change(this);" style="display:none;"/>
-				  <div class="card-body text-center">
-				    <p class="card-text"><input type="text" name="category_text" value="${list.category }"/></p>
-				    <div class="btn-group" role="group">
-				     	<a href="javascript:;" class="btn btn-outline-primary btn-sm" onclick="modify('${list.idx}',this)">수정</a>
-				     	<a href="javascript:;" class="btn btn-outline-danger btn-sm" onclick="delete_category('${list.idx}')">삭제</a>
-					</div>
-				  </div>
-				</div>
-       		</c:forEach>
+          	<div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">MemberTable</h6>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>UserId</th>
+                      <th>UserImage</th>
+                      <th>nikcname</th>
+                    </tr>
+                  </thead>
+                 <!--  <tfoot>
+                    <tr>
+                      <th>Name</th>
+                      <th>Position</th>
+                      <th>Office</th>
+                      <th>Age</th>
+                      <th>Start date</th>
+                      <th>Salary</th>
+                    </tr>
+                  </tfoot> -->
+                  <tbody>
+                    <tr>
+                      <td>Donna Snider</td>
+                      <td>Customer Support</td>
+                      <td>New York</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
 		</div>
       </div>
@@ -129,7 +136,16 @@
 
   <!-- Custom scripts for all pages-->
   <script src="/admin/js/sb-admin-2.min.js"></script>
+  
+  <!-- Page level plugins -->
+  <script src="vendor/datatables/jquery.dataTables.min.js"></script>
+  <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
 <script type="text/javascript">
+$(document).ready(function() {
+	  $('#dataTable').DataTable();
+});
+
 function img_click(obj){
 	$(obj).next().trigger("click");
 }

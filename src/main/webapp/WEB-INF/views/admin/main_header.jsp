@@ -10,7 +10,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>jBlog Admin - Dashboard</title>
+  <title>jBlog Admin - MainHeader</title>
 
   <!-- Custom fonts for this template-->
   <link href="/admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">

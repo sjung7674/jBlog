@@ -6,6 +6,7 @@ import com.hjb.jBlog.dto.CategoryDTO;
 
 public interface AdminCategoryDAO {
 	public int insertCategory(CategoryDTO dto);
-	public int modifyCategory(HashMap<String,String> map);
-	public int deleteCategory(HashMap<String,String> map);
+	public int modifyCategory(CategoryDTO dto);
+	public int deleteCategory(CategoryDTO dto);
+	public CategoryDTO selectCategoryByIdx(CategoryDTO dto);
 }

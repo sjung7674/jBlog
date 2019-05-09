@@ -26,6 +26,12 @@ public class AdminCategoryServiceImpl implements AdminCategoryService{
 		String orgFileName = mpf.getOriginalFilename();
 		FileUploader fu = new FileUploader();
 		String result="error";
+		if(dto.getCategory().equals("")){
+			return result;
+		}
+		if(dto.getHeader_image()==null){
+			return result;
+		}
 		if(fu.is10MBOver(mpf)){
 			result="over_size";
 		}else{
@@ -52,15 +58,67 @@ public class AdminCategoryServiceImpl implements AdminCategoryService{
 	}
 
 	@Override
-	public int modifyCategory(HashMap<String, String> map) {
-		// TODO Auto-generated method stub
-		return 0;
+	public String modifyCategory(CategoryDTO dto) {
+		MultipartFile mpf = dto.getHeader_image();
+		String result="error";
+		if(dto.getCategory().equals("")){
+			return result;
+		}
+		if(dto.getIdx()==-1){
+			return result;
+		}
+		if(mpf!=null){
+			String orgFileName = mpf.getOriginalFilename();
+			FileUploader fu = new FileUploader();
+			if(fu.is10MBOver(mpf)){
+				result="over_size";
+			}else{
+				try{
+					if(fu.isJGPBImage(mpf)){
+						String fileExt = orgFileName.substring(orgFileName.lastIndexOf(".")+1, orgFileName.length());
+						String fileName = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date())+"."+fileExt;
+						String dir = "D:"+File.separator+"upload"+File.separator+"category";
+						fu.uploadFileJGPB(mpf, fileName, dir);
+						dto.setHeader_image_name(fileName);
+					}else{
+						result="not_JGPBImage";
+					}
+				}catch(IOException e){
+					e.printStackTrace();
+					result="error";
+				}
+			}
+		}
+		int res = adminCategoryDAO.modifyCategory(dto);
+		if(res==1){
+			result="success";
+		}
+		return result;
 	}
 
 	@Override
-	public int deleteCategory(HashMap<String, String> map) {
-		// TODO Auto-generated method stub
-		return 0;
+	public String deleteCategory(CategoryDTO dto) {
+		String result="error";
+		if(dto.getIdx()==-1){
+			return result;
+		}
+		try{
+			CategoryDTO tmpDto = adminCategoryDAO.selectCategoryByIdx(dto);
+			String dir = "D:"+File.separator+"upload"+File.separator+"category"+File.separator+tmpDto.getHeader_image_name();
+			System.out.println(dir);
+			File f = new File (dir);
+			if(f.exists()){
+				f.delete();
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		int res = adminCategoryDAO.deleteCategory(dto);
+		if(res==1){
+			result="success";
+		}
+		return result;
 	}
 
 }
