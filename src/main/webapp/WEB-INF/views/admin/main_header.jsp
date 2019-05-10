@@ -147,6 +147,10 @@
   <!-- Custom scripts for all pages-->
   <script src="/admin/js/sb-admin-2.min.js"></script>
 <script type="text/javascript">
+$(document).ready(function(){
+	$(".nav-item").removeClass("active");
+	$(".nav-item").eq(1).addClass("active");
+})
 function binding_text(obj){
 	if(obj.id=='title'){
 		$("#title_main").text(obj.value);

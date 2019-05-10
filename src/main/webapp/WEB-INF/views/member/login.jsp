@@ -28,9 +28,8 @@
 <jsp:include page="../include/nav.jsp"/>
   <!-- Main Content -->
   <div class="container mt-5 pt-5">
-    <div class="row">
-      <div class="col mx-auto" style="max-width:500px">
-      	<form class="form-signin" action="/member/login" method="post">
+      <div class="col mx-auto mt-5 pt-5 text-center" style="max-width:500px">
+      	<%-- <form class="form-signin" action="/member/login" method="post">
 	  		<h2 class="form-signin-heading">Login</h2>
 			<label for="inputEmail" class="sr-only">Email address</label>
 			<input type="email" id="inputEmail" name = "inputEmail" class="form-control mb-1" placeholder="Email address" required="" autofocus="">
@@ -41,9 +40,9 @@
 			</c:if>
 			<input type="hidden"	name="${_csrf.parameterName}"	value="${_csrf.token}"/>
 			<button class="btn btn-info btn-block mb-3" type="submit">로그인</button>
-		</form>
+		</form> --%>
+		<a href="${url }" onclick="window.open(this.href, 'naverloginpop', 'titlebar=1, resizable=1, scrollbars=yes, width=600, height=550'); return false" target="_blank"><img height="50" src="/img/naver_login_btn.PNG"/></a>
       </div>
-    </div>
   </div>
 
   <hr>

@@ -96,22 +96,14 @@
                       <th>nikcname</th>
                     </tr>
                   </thead>
-                 <!--  <tfoot>
-                    <tr>
-                      <th>Name</th>
-                      <th>Position</th>
-                      <th>Office</th>
-                      <th>Age</th>
-                      <th>Start date</th>
-                      <th>Salary</th>
-                    </tr>
-                  </tfoot> -->
                   <tbody>
-                    <tr>
-                      <td>Donna Snider</td>
-                      <td>Customer Support</td>
-                      <td>New York</td>
-                    </tr>
+                  	<c:forEach items="${memberList }" var="list">
+                  		<tr>
+	                      <td>${list.userid }</td>
+	                      <td>${list.user_image }</td>
+	                      <td>${list.nick_name }</td>
+	                    </tr>
+                  	</c:forEach>
                   </tbody>
                 </table>
               </div>
@@ -144,155 +136,9 @@
 <script type="text/javascript">
 $(document).ready(function() {
 	  $('#dataTable').DataTable();
+	  $(".nav-item").removeClass("active");
+	  $(".nav-item").eq(3).addClass("active");
 });
-
-function img_click(obj){
-	$(obj).next().trigger("click");
-}
-function img_change(obj){
-	var reader = new FileReader();
-    reader.onload = function(e) {
-        $(obj).prev().prop("src", e.target.result);
-    }
-    reader.readAsDataURL($(obj)[0].files[0]);
-}
-function save(obj){
-	var img =$(obj).parent().parent().find("input[type=file]");
-	var category_text = $(obj).parent().parent().find("input[name=category_text]");
-	if(!img[0].files[0]){
-		alert('이미지를 선택해주세요.');
-		img.focus();
-		return;
-	}
-	if(!category_text.val()){
-		alert('카테고리명을 입력해주세요');
-		category_text.focus();
-		return;
-	}
-	var headers = {};
-	headers["X-CSRF-TOKEN"] = $("input[name=_csrf]").val();
-	var formData = new FormData(); 
-	formData.append("header_image",img[0].files[0]);
-	formData.append("category",category_text.val());
-	$.ajax({
-		url : "/admin/category/save",
-		type : "post",
-		data: formData,
-		contentType: false,
-		processData: false,
-		headers : headers,
-		success : function(result) {
-			if(result=='success'){
-				alert("저장하였습니다.");
-				$(obj).parent().parent().find("img").prop("src","");
-				category_text.val('');
-				getCategoryList();
-			}else if(result=='over_size'){
-				alert("사진은 10MB이하로 업로드하세요.");
-			}else if(result=='not_JGPBImage'){
-				alert("사진은 jpg,gif,png,bmp로 업로드하세요.");
-			}else if(result=='error'){
-				alert("오류가 발생하였습니다.");
-			}
-		},
-		error: function(){
-			alert("오류가 발생하였습니다.");
-		}
-	});
-	
-}
-function getCategoryList(){
-	$.ajax({
-		url : "/admin/category/get",
-		type : "get",
-		success : function(result) {
-		drawHtml(result);
-		},
-		error: function(){
-			alert("오류가 발생하였습니다.");
-		}
-	});
-}
-function drawHtml(json){
-	var parse = $.parseJSON(json);
-	var html="";
-	for(var i = 0;i<parse.length;i++){
-		html += '<div class="card" style="width: 18rem;">';
-		html += '<img src="/getImg?imgName='+parse[i].header_image_name+'&path=category" class="card-img-top" alt="header_image" onclick="img_click(this);" onerror="this.src=\'/img/thumbnail_error.jpg\'">';
-		html += '<input type="file" name="header_image" onchange="img_change(this);" style="display:none;"/>';
-		html += '<div class="card-body text-center">';
-		html += '<p class="card-text"><input type="text" name="category_text" value="'+parse[i].category+'"/></p>';
-		html += '<div class="btn-group" role="group">';
-		html += '	<a href="javascript:;" class="btn btn-outline-primary btn-sm" onclick="modify('+parse[i].idx+',this)">수정</a>';
-		html += '	<a href="javascript:;" class="btn btn-outline-danger btn-sm" onclick="delete_category('+parse[i].idx+')">삭제</a>';
-		html += '</div></div></div>';
-	}
-	$(".card").not($(".card").eq(0)).remove();
-	$(".row").append(html);
-	
-}
-function modify(idx,obj){
-	var img =$(obj).parent().parent().parent().find("input[type=file]");
-	var category_text = $(obj).parent().parent().find("input[name=category_text]");
-	
-	if(!category_text.val()){
-		alert('카테고리명을 입력해주세요');
-		category_text.focus();
-		return;
-	}
-	var headers = {};
-	headers["X-CSRF-TOKEN"] = $("input[name=_csrf]").val();
-	var formData = new FormData(); 
-	if(img[0].files[0]){
-		formData.append("header_image",img[0].files[0]);
-	}
-	formData.append("category",category_text.val());
-	formData.append("idx",idx);
-	$.ajax({
-		url : "/admin/category/modify",
-		type : "post",
-		data: formData,
-		contentType: false,
-		processData: false,
-		headers : headers,
-		success : function(result) {
-			if(result=='success'){
-				alert("저장하였습니다.");
-				getCategoryList();
-			}else if(result=='over_size'){
-				alert("사진은 10MB이하로 업로드하세요.");
-			}else if(result=='not_JGPBImage'){
-				alert("사진은 jpg,gif,png,bmp로 업로드하세요.");
-			}else if(result=='error'){
-				alert("오류가 발생하였습니다.");
-			}
-		},
-		error: function(){
-			alert("오류가 발생하였습니다.");
-		}
-	});
-}
-function delete_category(idx){
-	var headers = {};
-	headers["X-CSRF-TOKEN"] = $("input[name=_csrf]").val();
-	$.ajax({
-		url : "/admin/category/delete",
-		type : "post",
-		data: {"idx":idx},
-		headers : headers,
-		success : function(result) {
-			if(result=='success'){
-				alert("삭제하였습니다.");
-				getCategoryList();
-			}else if(result=='error'){
-				alert("오류가 발생하였습니다.");
-			}
-		},
-		error: function(){
-			alert("오류가 발생하였습니다.");
-		}
-	});
-}
 </script>
 </body>
 

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hjb.jBlog.admin.mapper.AdminPost">
+	<select id="selectPostList" resultType="PostDTO">
+		SELECT p.idx, p.userid, (select category from category where idx=p.category) as category, title, sub_title,read_cnt, reg_date 
+		FROM post p 
+	</select>
+	<update id="adminUpdatePost" parameterType="PostDTO">
+		update post set category=#{category}, title=#{title}, sub_title=#{sub_title}, content=#{content}
+		<if test="header_image!=''">
+		,header_image=#{header_image} 
+		</if>
+		 where idx=#{idx}
+	</update>
+	<delete id="adminDeletePost" parameterType="PostDTO"> 
+		delete from post where idx=#{idx}
+	</delete>
+</mapper>

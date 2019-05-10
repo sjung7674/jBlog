@@ -39,6 +39,7 @@ public class SiteControlInterceptor extends HandlerInterceptorAdapter{
 			return true;
 		}
 		System.out.println("+++"+domain);
+		System.out.println(request.getParameter("_csrf"));
 		request.setAttribute("categoryList", writeService.getCategory());
 		Enumeration e = request.getSession().getAttributeNames();
 		while(e.hasMoreElements()){

@@ -1,5 +1,6 @@
 package com.hjb.jBlog.dao.impl;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -18,6 +19,11 @@ public class MemberDAOImpl implements memberDAO{
 	@Override
 	public MemberDTO selectUserByUserid(String id) {
 		return sqlSession.selectOne("selectUserByUserid", id);
+	}
+
+	@Override
+	public List<MemberDTO> selectUserList() {
+		return sqlSession.selectList("selectUserList");
 	}
 
 }

@@ -4,4 +4,7 @@
 	<select id="selectUserByUserid" parameterType="String" resultType="MemberDTO"> 
 		select idx,userid,password from member where userid=#{value}
 	</select>
+	<select id="selectUserList" resultType="MemberDTO">
+		select userid,user_image,nick_name from member
+	</select>
 </mapper>

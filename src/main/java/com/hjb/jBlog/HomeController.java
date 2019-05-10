@@ -54,4 +54,8 @@ public class HomeController {
 		}
 		return view;
 	}
+	@RequestMapping(value = "/error", method = RequestMethod.GET)
+	public String error(HttpServletRequest request ) {
+		return "errors/500";
+	}
 }

@@ -168,7 +168,13 @@
 
   <!-- Page level custom scripts -->
   <script src="/admin/js/demo/chart.js"></script>
-
+	<script>
+	$(document).ready(function(){
+		$(".nav-item").removeClass("active");
+		$(".nav-item").eq(0).addClass("active");
+	})
+	
+	</script>
 </body>
 
 </html>

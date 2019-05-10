@@ -122,12 +122,4 @@ public class WebSecurityConfig {
 			    auth.userDetailsService(adminUserDetailsService).passwordEncoder(encoder);
 			}
 		}
-		/*.antMatcher("/smarteditor2/**")
-		.headers()
-		.frameOptions()
-		.sameOrigin()
-		.and()*/
-		
-		
-	
 }

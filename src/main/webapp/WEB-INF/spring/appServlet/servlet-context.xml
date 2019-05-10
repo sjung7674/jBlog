@@ -35,6 +35,7 @@
 	<resources mapping="/admin/css/**" location="/WEB-INF/views/admin/css/" />
 	<resources mapping="/admin/js/**" location="/WEB-INF/views/admin/js/" />
 	<resources mapping="/admin/img/**" location="/WEB-INF/views/admin/img/" />
+	<resources mapping="/admin/smarteditor2/**" location="/WEB-INF/views/admin/smarteditor2/" />
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />

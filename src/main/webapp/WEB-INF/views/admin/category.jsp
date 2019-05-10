@@ -130,6 +130,10 @@
   <!-- Custom scripts for all pages-->
   <script src="/admin/js/sb-admin-2.min.js"></script>
 <script type="text/javascript">
+$(document).ready(function(){
+	$(".nav-item").removeClass("active");
+	$(".nav-item").eq(2).addClass("active");
+})
 function img_click(obj){
 	$(obj).next().trigger("click");
 }

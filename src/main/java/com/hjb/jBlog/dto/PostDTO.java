@@ -15,6 +15,7 @@ public class PostDTO {
 	private String user_image="";
 	private String header_image="";
 	private MultipartFile header_image_file=null;
+	private String read_cnt="";
 	public int getIdx() {
 		return idx;
 	}
@@ -77,6 +78,13 @@ public class PostDTO {
 	}
 	public void setSub_title(String sub_title) {
 		this.sub_title = sub_title;
+	}
+	
+	public String getRead_cnt() {
+		return read_cnt;
+	}
+	public void setRead_cnt(String read_cnt) {
+		this.read_cnt = read_cnt;
 	}
 	@Override
 	public String toString() {
