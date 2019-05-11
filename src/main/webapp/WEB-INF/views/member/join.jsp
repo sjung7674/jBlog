@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -30,28 +31,21 @@
   <div class="container mt-5 pt-5">
     <div class="row">
       <div class="col mx-auto" style="max-width:500px">
-      	<form action="/member/join_proc" method="post" enctype="multipart/form-data">
+      	<form:form commandName="memberDTO" action="/member/join_proc" method="post">
       		<input type="hidden" name="userid" value="${userid }">
+      		<input type="hidden" name="state" value="${param.state }">
       		<input type="hidden"	name="${_csrf.parameterName}"	value="${_csrf.token}"/>
 	      	<div class="form-group input-group">
 				<div class="input-group-prepend">
 				    <span class="input-group-text"> <i class="fa fa-user"></i> </span>
 				 </div>
-		        <input name="nick_name" class="form-control" placeholder="nick name" type="text">
-		    </div> <!-- form-group// -->
-		    <div class="form-group input-group">
-		    	<div class="input-group-prepend">
-				    <span class="input-group-text"> <i class="fa fa-image"></i> </span>
-				 </div>
-				  <div class="custom-file">
-				    <input type="file" class="custom-file-input" id="inputGroupFile01" name="user_image_file" aria-describedby="inputGroupFileAddon01" onchange="file_change(this);">
-				    <label class="custom-file-label" for="inputGroupFile01">profile image</label>
-				  </div>
+		        <input name="nick_name" class="form-control" placeholder="nick name" type="text" value="${nick_name }"> 
+		        <form:errors path="*" cssStyle="font-color:red;" cssClass="text-danger"/>
 		    </div> <!-- form-group// -->
 		    <div class="form-group">
 		        <button type="submit" class="btn btn-primary btn-block"> Create Account  </button>
 		    </div> <!-- form-group// --> 
-	    </form>
+	    </form:form>
       </div>
     </div>
   </div>

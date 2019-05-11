@@ -7,4 +7,7 @@
 	<select id="selectUserList" resultType="MemberDTO">
 		select userid,user_image,nick_name from member
 	</select>
+	<insert id="insertUser" parameterType="MemberDTO">
+		insert into member (`userid`, 	`password`, 	`nikc_name`) values (#{userid},#{password},#{nikc_name})
+	</insert>
 </mapper>

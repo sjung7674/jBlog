@@ -43,7 +43,7 @@ public class MemberController {
 		ModelAndView view = new ModelAndView();
 		view.setViewName("member/login");
 		String clientId = "8ZMJxXbaGgxW_N0Yu9Gf";//애플리케이션 클라이언트 아이디값";
-	    String redirectURI = URLEncoder.encode("http://192.168.10.135:8085/member/oauth/oauth_proc", "UTF-8");
+	    String redirectURI = URLEncoder.encode("http://localhost:8080/member/oauth/oauth_proc", "UTF-8");
 	    SecureRandom random = new SecureRandom();
 	    String state = new BigInteger(130, random).toString();
 	    String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code";
@@ -82,7 +82,7 @@ public class MemberController {
 		request.getSession().setAttribute("access_token",memberService.oauth_service(view, code, state) );
 	    return view;
 	}
-	@RequestMapping("/join_proc")
+	@RequestMapping(value="/join_proc",method=RequestMethod.POST)
 	public ModelAndView join_proc(MemberDTO dto,HttpServletRequest request,BindingResult result){
 		ModelAndView view = new ModelAndView();
 		String state=request.getParameter("state");

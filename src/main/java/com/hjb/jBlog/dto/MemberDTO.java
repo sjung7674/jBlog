@@ -13,8 +13,6 @@ public class MemberDTO implements UserDetails {
 	private int idx = -1;
 	private String userid = "";
 	private String password = "";
-	private String user_image="";
-	private MultipartFile user_image_file;
 	private String nick_name="";
 	public int getIdx() {
 		return idx;
@@ -35,24 +33,11 @@ public class MemberDTO implements UserDetails {
 		this.password = password;
 	}
 	
-	public String getUser_image() {
-		return user_image;
-	}
-	public void setUser_image(String user_image) {
-		this.user_image = user_image;
-	}
-	
 	public String getNick_name() {
 		return nick_name;
 	}
 	public void setNick_name(String nick_name) {
 		this.nick_name = nick_name;
-	}
-	public MultipartFile getUser_image_file() {
-		return user_image_file;
-	}
-	public void setUser_image_file(MultipartFile user_image_file) {
-		this.user_image_file = user_image_file;
 	}
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -89,8 +74,8 @@ public class MemberDTO implements UserDetails {
 	}
 	@Override
 	public String toString() {
-		return "MemberDTO [idx=" + idx + ", userid=" + userid + ", password=" + password + ", user_image=" + user_image
-				+ ", nick_name=" + nick_name + "]";
+		return "MemberDTO [idx=" + idx + ", userid=" + userid + ", password=" + password + ", nick_name=" + nick_name
+				+ "]";
 	}
 	
 }
