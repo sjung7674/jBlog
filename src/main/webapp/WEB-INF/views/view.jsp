@@ -38,7 +38,7 @@
             <h1>${post_dto.title }</h1>
             <h2 class="subheading">${post_dto.sub_title }</h2>
             <span class="meta">Posted by
-              <a href="#">${post_dto.userid }</a>
+              <a href="#">${post_dto.nick_name }</a>
                on <fmt:formatDate value="${post_dto.reg_date}" pattern="yyyy-MM-dd"/>
              </span>
           </div>

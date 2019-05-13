@@ -14,7 +14,7 @@
 <script type="text/javascript" src="./js/service/SE2M_Configuration.js" charset="utf-8"></script>
 <script type="text/javascript" src="./js/service/SE2BasicCreator.js" charset="utf-8"></script>
 <script type="text/javascript" src="./js/smarteditor2.min.js" charset="utf-8"></script>
-
+<script type="text/javascript" src="./js/service/hp_SE_QuickEditor_Image.js" charset="utf-8"> </script>
 </head>
 <body>
 
@@ -527,18 +527,21 @@
 					<!-- //찾기/바꾸기 -->
 					<!--//@lazyload_html-->
 				</li>
-
-</ul>
-<script type="text/javascript">
-</script>
-<ul class="se2_multy">
-	<li class="se2_mn husky_seditor_ui_photo_attach">
-		<button type="button" class="se2_photo ico_btn" onclick="parent.Global_Smart_Editor_Image_Upload(window.location.hash.slice(1));">
-			<span class="se2_icon"></span><span class="se2_mntxt">사진<span class="se2_new"></span></span>
-		</button>
-	</li>
-</ul>
-
+			</ul>
+			<ul>
+			    <li class="husky_seditor_ui_kakaoMap">
+			      <!-- 버튼 -->
+			      <button type="button" title="카카오맵삽입"  class="se2_kakaoMap" onclick="parent.open_map_modal();"><span class="_buttonRound">지도</span></button>
+			      <!-- 레이어 -->
+			    </li>
+			  </ul>
+			<ul class="se2_multy">
+				<li class="se2_mn husky_seditor_ui_photo_attach">
+					<button type="button" class="se2_photo ico_btn" onclick="parent.Global_Smart_Editor_Image_Upload(window.location.hash.slice(1));">
+						<span class="se2_icon"></span><span class="se2_mntxt">사진<span class="se2_new"></span></span>
+					</button>
+				</li>
+			</ul>
 			</div>
 			<!-- //704이상 -->
 		</div>

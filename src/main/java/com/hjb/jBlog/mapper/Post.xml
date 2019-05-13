@@ -15,11 +15,11 @@
 		delete from post where idx=#{idx} and userid=#{userid}
 	</delete>
 	<select id="selectPostByIdx" parameterType="String" resultType="PostDTO">
-		SELECT p.idx, p.userid, m.user_image, p.category,sub_title, title, content, header_image,  reg_date 
+		SELECT p.idx, p.userid,m.nick_name, p.category,sub_title, title, content, header_image,  reg_date 
 		FROM post p INNER JOIN member m ON p.userid=m.userid   WHERE p.idx=#{value}
 	</select>
 	<select id="selectPostListNewest" parameterType="Map" resultType="PostDTO">
-		SELECT p.idx, p.userid, p.category, title, sub_title, reg_date 
+		SELECT p.idx, p.userid, p.category, title, sub_title, reg_date ,m.nick_name
 		FROM post p LEFT JOIN member m ON p.userid=m.userid
 		<if test="category_no!=null and category_no!='' ">
 			where p.category=#{category_no}
@@ -35,7 +35,7 @@
 		ORDER BY reg_date DESC
 	</select>
 	<select id="selectViewByIdxAndUserId" resultType="postDTO" parameterType="postDTO">
-		SELECT p.idx, p.userid, m.user_image, p.category,sub_title, title, content, header_image,  reg_date 
+		SELECT p.idx, p.userid, p.category,sub_title, title, content, header_image,  reg_date 
 		FROM post p INNER JOIN member m ON p.userid=m.userid   WHERE p.idx=#{idx} AND p.userid=#{userid}
 	</select>
 	<update id="updateReadCnt" parameterType="String">

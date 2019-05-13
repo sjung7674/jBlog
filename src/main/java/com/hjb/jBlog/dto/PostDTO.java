@@ -12,10 +12,10 @@ public class PostDTO {
 	private String title = "";
 	private String content = "";
 	private Date reg_date = null;
-	private String user_image="";
 	private String header_image="";
 	private MultipartFile header_image_file=null;
 	private String read_cnt="";
+	private String nick_name="";
 	public int getIdx() {
 		return idx;
 	}
@@ -53,13 +53,6 @@ public class PostDTO {
 		this.reg_date = reg_date;
 	}
 	
-	public String getUser_image() {
-		return user_image;
-	}
-	public void setUser_image(String user_image) {
-		this.user_image = user_image;
-	}
-	
 	public String getHeader_image() {
 		return header_image;
 	}
@@ -86,14 +79,19 @@ public class PostDTO {
 	public void setRead_cnt(String read_cnt) {
 		this.read_cnt = read_cnt;
 	}
+	
+	public String getNick_name() {
+		return nick_name;
+	}
+	public void setNick_name(String nick_name) {
+		this.nick_name = nick_name;
+	}
 	@Override
 	public String toString() {
 		return "PostDTO [idx=" + idx + ", userid=" + userid + ", category=" + category + ", sub_title=" + sub_title
-				+ ", title=" + title + ", content=" + content + ", reg_date=" + reg_date + ", user_image=" + user_image
-				+ ", header_image=" + header_image + ", header_image_file=" + header_image_file + "]";
+				+ ", title=" + title + ", content=" + content + ", reg_date=" + reg_date + ", header_image="
+				+ header_image + ", header_image_file=" + header_image_file + ", read_cnt=" + read_cnt + ", nick_name="
+				+ nick_name + "]";
 	}
-	
-	
-	
 	
 }

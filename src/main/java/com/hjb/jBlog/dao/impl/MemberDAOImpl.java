@@ -7,11 +7,11 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.hjb.jBlog.dao.memberDAO;
+import com.hjb.jBlog.dao.MemberDAO;
 import com.hjb.jBlog.dto.MemberDTO;
 
 @Repository
-public class MemberDAOImpl implements memberDAO{
+public class MemberDAOImpl implements MemberDAO{
 
 	@Autowired
 	private SqlSession sqlSession;
@@ -24,6 +24,16 @@ public class MemberDAOImpl implements memberDAO{
 	@Override
 	public List<MemberDTO> selectUserList() {
 		return sqlSession.selectList("selectUserList");
+	}
+
+	@Override
+	public int insertUser(MemberDTO memberDTO) {
+		return sqlSession.insert("insertUser",memberDTO);
+	}
+
+	@Override
+	public MemberDTO selectNaverUserByUserid(MemberDTO memberDTO) {
+		return sqlSession.selectOne("selectNaverUserByUserid", memberDTO);
 	}
 
 }

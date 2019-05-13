@@ -73,6 +73,7 @@ public class WriteServiceImpl implements WriteService,CategoryService{
 		List<HashMap<String,String>> obj_list= new ArrayList<HashMap<String,String>>();
 		
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication(); 
+		System.out.println(authentication.getPrincipal());
 		MemberDTO user = (MemberDTO) authentication.getPrincipal();
 		postDTO.setUserid(user.getUsername());
 

@@ -92,7 +92,6 @@
                   <thead>
                     <tr>
                       <th>UserId</th>
-                      <th>UserImage</th>
                       <th>nikcname</th>
                     </tr>
                   </thead>
@@ -100,7 +99,6 @@
                   	<c:forEach items="${memberList }" var="list">
                   		<tr>
 	                      <td>${list.userid }</td>
-	                      <td>${list.user_image }</td>
 	                      <td>${list.nick_name }</td>
 	                    </tr>
                   	</c:forEach>

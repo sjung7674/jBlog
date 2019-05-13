@@ -181,3 +181,6 @@
 			return "K";
 		}
 	}
+	function open_map_modal(){
+		$("#map_modal").trigger("click");
+	}

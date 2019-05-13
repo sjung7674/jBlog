@@ -5,9 +5,12 @@
 		select idx,userid,password from member where userid=#{value}
 	</select>
 	<select id="selectUserList" resultType="MemberDTO">
-		select userid,user_image,nick_name from member
+		select userid,nick_name from member
 	</select>
 	<insert id="insertUser" parameterType="MemberDTO">
-		insert into member (`userid`, 	`password`, 	`nikc_name`) values (#{userid},#{password},#{nikc_name})
+		insert into member (`userid`, 	`password`, 	`nick_name`) values (#{userid},#{password},#{nick_name})
 	</insert>
+	<select id="selectNaverUserByUserid" parameterType="MemberDTO" resultType="MemberDTO">
+		select idx,userid,password,nick_name from member where userid=#{userid} and password=#{password}
+	</select>
 </mapper>

@@ -69,7 +69,7 @@
 	            </h3>
 	          </a>
 	          <p class="post-meta">Posted by
-	            <a href="#">${list.userid }</a>
+	            <a href="#">${list.nick_name }</a>
 	            on <fmt:formatDate value="${list.reg_date}" pattern="yyyy-MM-dd"/></p>
 	        </div>
 	        <hr>

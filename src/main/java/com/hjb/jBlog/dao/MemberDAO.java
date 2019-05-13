@@ -5,7 +5,9 @@ import java.util.Map;
 
 import com.hjb.jBlog.dto.MemberDTO;
 
-public interface memberDAO {
+public interface MemberDAO {
 	public MemberDTO selectUserByUserid(String id);
 	public List<MemberDTO> selectUserList();
+	public int insertUser(MemberDTO memberDTO);
+	public MemberDTO selectNaverUserByUserid(MemberDTO memberDTO);
 }

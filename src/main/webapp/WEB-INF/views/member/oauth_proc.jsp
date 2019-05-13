@@ -16,7 +16,7 @@
 		self.close();
 	</c:when>
 	<c:otherwise>
-		opener.parent.location.href="/member/join?state=${state}";
+		opener.parent.location.href="/member/login_proc?state=${state}";
 		self.close();
 	</c:otherwise>
 </c:choose>

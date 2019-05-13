@@ -32,16 +32,16 @@
     <div class="row">
       <div class="col mx-auto" style="max-width:500px">
       	<form:form commandName="memberDTO" action="/member/join_proc" method="post">
-      		<input type="hidden" name="userid" value="${userid }">
+      		<input type="hidden" name="userid" value="${memberDTO.userid }">
       		<input type="hidden" name="state" value="${param.state }">
       		<input type="hidden"	name="${_csrf.parameterName}"	value="${_csrf.token}"/>
 	      	<div class="form-group input-group">
 				<div class="input-group-prepend">
 				    <span class="input-group-text"> <i class="fa fa-user"></i> </span>
 				 </div>
-		        <input name="nick_name" class="form-control" placeholder="nick name" type="text" value="${nick_name }"> 
-		        <form:errors path="*" cssStyle="font-color:red;" cssClass="text-danger"/>
+		        <input name="nick_name" class="form-control" placeholder="nick name" type="text" value="${memberDTO.nick_name }"> 
 		    </div> <!-- form-group// -->
+		    <form:errors path="*" cssStyle="font-color:red;" cssClass="text-danger"/>
 		    <div class="form-group">
 		        <button type="submit" class="btn btn-primary btn-block"> Create Account  </button>
 		    </div> <!-- form-group// --> 
@@ -58,7 +58,7 @@
 
   <!-- Custom scripts for this template -->
 <script>
-<c:if test="${empty userid}">
+<c:if test="${empty memberDTO.userid}">
 	location.href="/error";
 </c:if>
 $('#mainNav').addClass('is-visible is-fixed');
