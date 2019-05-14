@@ -2,7 +2,8 @@
 SQLyog Community v12.3.3 (64 bit)
 MySQL - 5.7.17 : Database - jblog
 *********************************************************************
-*/
+*/
+
 
 /*!40101 SET NAMES utf8 */;
 
@@ -36,7 +37,7 @@ CREATE TABLE `category` (
   `category` varchar(200) CHARACTER SET utf8 NOT NULL,
   `header_image` varchar(1000) CHARACTER SET utf8 NOT NULL,
   PRIMARY KEY (`idx`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
 
 /*Table structure for table `main_header` */
 
@@ -57,11 +58,10 @@ CREATE TABLE `member` (
   `idx` int(11) NOT NULL AUTO_INCREMENT,
   `userid` varchar(200) CHARACTER SET utf8 NOT NULL,
   `password` varchar(1000) CHARACTER SET utf8 NOT NULL,
-  `user_image` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
-  `nikc_name` varchar(500) CHARACTER SET utf8 NOT NULL,
+  `nick_name` varchar(500) CHARACTER SET utf8 NOT NULL,
   PRIMARY KEY (`idx`),
   UNIQUE KEY `UNIQUE` (`userid`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 
 /*Table structure for table `post` */
 
@@ -76,13 +76,13 @@ CREATE TABLE `post` (
   `content` text CHARACTER SET utf8,
   `header_image` varchar(1000) CHARACTER SET utf8 DEFAULT NULL,
   `read_cnt` int(11) NOT NULL DEFAULT '0',
-  `reg_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `reg_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`idx`),
   KEY `post_ibfk_1` (`userid`),
   KEY `post_ibfk_2` (`category`),
   CONSTRAINT `post_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `member` (`userid`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `post_ibfk_2` FOREIGN KEY (`category`) REFERENCES `category` (`idx`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
 
 /*Table structure for table `visit_stat_all` */
 
@@ -107,7 +107,7 @@ CREATE TABLE `visit_stat_all` (
   `PREPAGE` varchar(1000) CHARACTER SET utf8 DEFAULT NULL,
   `REGDATE` datetime DEFAULT NULL,
   PRIMARY KEY (`idx`)
-) ENGINE=InnoDB AUTO_INCREMENT=18898280 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=18898758 DEFAULT CHARSET=utf8mb4;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
