@@ -10,6 +10,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -30,6 +31,8 @@ public class MemberServiceImpl implements MemberService, UserDetailsService{
 	
 	@Autowired
 	private MemberDAO memberDAO;
+	@Value("${uri.path}")
+	private String uri_path;
 	
 	@Override
 	public UserDetails loadUserByUsername(String id) throws UsernameNotFoundException {
@@ -49,7 +52,7 @@ public class MemberServiceImpl implements MemberService, UserDetailsService{
 	    String clientSecret = "OPX5Lzj19g";//애플리케이션 클라이언트 시크릿값";
 	    String redirectURI;
 		try {
-			redirectURI = URLEncoder.encode("http://192.168.10.135:8085/member/login_proc", "UTF-8");
+			redirectURI = URLEncoder.encode(uri_path+"/member/login_proc", "UTF-8");
 			String apiURL;
 		    apiURL = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&";
 		    apiURL += "client_id=" + clientId;

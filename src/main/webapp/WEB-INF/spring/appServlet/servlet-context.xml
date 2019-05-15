@@ -8,7 +8,14 @@
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
-	
+	<beans:bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<beans:property name="locations">
+			<beans:value>classpath:jblog.properties</beans:value>
+		</beans:property>
+		<beans:property name="ignoreUnresolvablePlaceholders">
+			<beans:value>true</beans:value>
+		</beans:property>
+	</beans:bean>
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven>
 		<message-converters>

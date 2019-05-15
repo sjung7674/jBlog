@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -26,13 +27,14 @@ import com.hjb.jBlog.service.MemberService;
 public class MemberController {
 	@Autowired
 	MemberService memberService;
-	
+	@Value("${uri.path}")
+	private String uri_path;
 	@RequestMapping(value = "/login")
 	public ModelAndView member_login(HttpServletRequest request, HttpSession session) throws UnsupportedEncodingException {
 		ModelAndView view = new ModelAndView();
 		view.setViewName("member/login");
 		String clientId = "8ZMJxXbaGgxW_N0Yu9Gf";//애플리케이션 클라이언트 아이디값";
-	    String redirectURI = URLEncoder.encode("http://192.168.10.135:8085/member/oauth/oauth_proc", "UTF-8");
+	    String redirectURI = URLEncoder.encode(uri_path+"/member/oauth/oauth_proc", "UTF-8");
 	    SecureRandom random = new SecureRandom();
 	    String state = new BigInteger(130, random).toString();
 	    String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code";

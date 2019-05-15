@@ -14,7 +14,10 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="locations">
-			<value>/WEB-INF/spring/dbpool.properties</value>
+			<value>classpath:dbpool.properties</value>
+		</property>
+		<property name="ignoreUnresolvablePlaceholders">
+			<value>true</value>
 		</property>
 	</bean>
 	
