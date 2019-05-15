@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -19,7 +20,8 @@ import com.hjb.jBlog.util.FileUploader;
 public class AdminCategoryServiceImpl implements AdminCategoryService{
 	@Autowired
 	private AdminCategoryDAO adminCategoryDAO;
-	
+	@Value("${upload.path}")
+	private String upload_path;
 	@Override
 	public String saveCategory(CategoryDTO dto) {
 		MultipartFile mpf = dto.getHeader_image();
@@ -39,7 +41,7 @@ public class AdminCategoryServiceImpl implements AdminCategoryService{
 				if(fu.isJGPBImage(mpf)){
 					String fileExt = orgFileName.substring(orgFileName.lastIndexOf(".")+1, orgFileName.length());
 					String fileName = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date())+"."+fileExt;
-					String dir = "D:"+File.separator+"upload"+File.separator+"category";
+					String dir = upload_path+File.separator+"category";
 					fu.uploadFileJGPB(mpf, fileName, dir);
 					dto.setHeader_image_name(fileName);
 					int res = adminCategoryDAO.insertCategory(dto);
@@ -77,7 +79,7 @@ public class AdminCategoryServiceImpl implements AdminCategoryService{
 					if(fu.isJGPBImage(mpf)){
 						String fileExt = orgFileName.substring(orgFileName.lastIndexOf(".")+1, orgFileName.length());
 						String fileName = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date())+"."+fileExt;
-						String dir = "D:"+File.separator+"upload"+File.separator+"category";
+						String dir = upload_path+File.separator+"category";
 						fu.uploadFileJGPB(mpf, fileName, dir);
 						dto.setHeader_image_name(fileName);
 					}else{
@@ -104,7 +106,7 @@ public class AdminCategoryServiceImpl implements AdminCategoryService{
 		}
 		try{
 			CategoryDTO tmpDto = adminCategoryDAO.selectCategoryByIdx(dto);
-			String dir = "D:"+File.separator+"upload"+File.separator+"category"+File.separator+tmpDto.getHeader_image_name();
+			String dir =upload_path+File.separator+"category"+File.separator+tmpDto.getHeader_image_name();
 			System.out.println(dir);
 			File f = new File (dir);
 			if(f.exists()){

@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -20,7 +21,8 @@ public class AdminHeaderServiceImpl implements AdminHeaderService{
 
 	@Autowired
 	private AdminHeaderDAOImpl adminHeaderDAO;
-	
+	@Value("${upload.path}")
+	private String upload_path;
 	@Override
 	public String updateHeader(String title, String subtitle, MultipartFile mpf) {
 		String result="error";
@@ -37,7 +39,7 @@ public class AdminHeaderServiceImpl implements AdminHeaderService{
 						try{
 							String fileExt = orgFileName.substring(orgFileName.lastIndexOf(".")+1, orgFileName.length());
 							String fileName = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date())+"."+fileExt;
-							String dir = "D:"+File.separator+"upload";
+							String dir = upload_path;
 							fu.uploadFileJGPB(mpf, fileName, dir);
 							HashMap<String,String> map = new HashMap<String,String>();
 							map.put("title", title);

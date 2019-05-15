@@ -177,6 +177,15 @@ $(document).ready(function () {
   	$(".nav-item").removeClass("active");
 	$(".nav-item").eq(4).addClass("active");
 });
+function file_change(obj){
+	var reader = new FileReader();
+    reader.onload = function(e) {
+        $('#thumbnail').attr('src', e.target.result);
+    }
+    reader.readAsDataURL(obj.files[0]);
+    
+	$(obj).next().text(obj.files[0].name);
+}
 function imgclick(){
 	$("input[type=file]").trigger("click");
 	

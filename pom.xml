@@ -261,12 +261,12 @@
              	<groupId>org.apache.tomcat.maven</groupId>
              	<artifactId>tomcat7-maven-plugin</artifactId>
              	<version>2.2</version>
-             	<!-- <configuration>
+             	<configuration>
 				  <url>http://localhost</url>
 				  	<port>8085</port>
 				  	<path>/</path>
-				 </configuration> -->
-				 <configuration>
+				 </configuration>
+				<!--  <configuration>
 				    <mode>war</mode>
 				    <url>http://13.125.182.84:80/manager/text</url>
 				    <username>admin</username>
@@ -274,7 +274,7 @@
 			        <charset>UTF-8</charset>
 			        <uriEncoding>UTF-8</uriEncoding>
 				    <path>/jBlog</path>
-				  </configuration>
+				  </configuration> -->
              </plugin>
         </plugins>
         <resources>

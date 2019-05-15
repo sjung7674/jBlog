@@ -29,7 +29,19 @@
 <body>
 <jsp:include page="include/nav.jsp"/>
   <!-- Page Header -->
-  <header class="masthead" style="background-image: url('/getImg?imgName=${main_header.header_image }')">
+  <c:choose>
+ 		<c:when test="${not empty param.category_no }">
+ 			<c:forEach items="${categoryList }"  var="list">
+ 				<c:if test="${list.idx== param.category_no }">
+ 					<header class="masthead" style="background-image: url('/getImg?imgName=${list.header_image_name }&path=category')">
+ 				</c:if>
+       	</c:forEach>
+ 		</c:when>
+ 		<c:otherwise>
+ 			<header class="masthead" style="background-image: url('/getImg?imgName=${main_header.header_image }')">
+ 		</c:otherwise>
+ 	</c:choose>
+  
     <div class="overlay"></div>
     <div class="container">
       <div class="row">

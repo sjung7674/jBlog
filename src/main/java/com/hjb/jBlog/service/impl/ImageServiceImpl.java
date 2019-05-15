@@ -7,13 +7,16 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ImageServiceImpl {
+	@Value("${upload.path}")
+	private String upload_path;
 	public String getImage(String imgName,String path, ServletOutputStream out) throws IOException{
 		String ext      = imgName.substring(imgName.lastIndexOf(".")+1);
-		String realFolder = "D:"+File.separator+"upload";
+		String realFolder = upload_path;
 		if(!path.equals("")){
 			realFolder = realFolder + File.separator + path;
 		}

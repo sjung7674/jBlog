@@ -83,6 +83,7 @@
 	<servlet-mapping>
         <servlet-name>default</servlet-name>
         <url-pattern>*.ico</url-pattern>
+        <url-pattern>*.txt</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
     	<welcome-file>home.jsp</welcome-file>

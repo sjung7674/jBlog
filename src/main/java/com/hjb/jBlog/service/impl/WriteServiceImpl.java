@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -39,7 +40,8 @@ public class WriteServiceImpl implements WriteService,CategoryService{
 	private CategoryDAOImpl categoryDao;
 	@Autowired
 	private ReadDAOImpl readDAO;
-	
+	@Value("${upload.path}")
+	private String upload_path;
 	@Override
 	public String FileUploadService(MultipartFile mpf) {
 		String result="";
@@ -52,7 +54,7 @@ public class WriteServiceImpl implements WriteService,CategoryService{
 				if(fu.isJGPBImage(mpf)){
 					String fileExt = orgFileName.substring(orgFileName.lastIndexOf(".")+1, orgFileName.length());
 					String fileName = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date())+"."+fileExt;
-					String dir = "D:"+File.separator+"upload";
+					String dir = upload_path;
 					fu.uploadFileJGPB(mpf, fileName, dir);
 					result=fileName;
 				}else{
@@ -203,7 +205,7 @@ public class WriteServiceImpl implements WriteService,CategoryService{
 		postDTO = readDAO.selectViewByIdxAndUserId(postDTO);
 		
 		try{
-			String dir = "D:"+File.separator+"upload"+File.separator+postDTO.getHeader_image();
+			String dir =upload_path+File.separator+postDTO.getHeader_image();
 			File f = new File (dir);
 			if(f.exists()){
 				f.delete();

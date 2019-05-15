@@ -10,6 +10,7 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -30,8 +31,10 @@ import com.hjb.jBlog.validator.PostValidator;
 public class AdminPostServiceImpl implements AdminPostService{
 	@Autowired
 	private AdminPostDAO adminPostDAO;
-	@Autowired ReadDAO readDAO;
-	
+	@Autowired 
+	private ReadDAO readDAO;
+	@Value("${upload.path}")
+	private String upload_path;
 	@Override
 	public List<PostDTO> postList(){
 		return adminPostDAO.selectPostList();
@@ -116,7 +119,7 @@ public class AdminPostServiceImpl implements AdminPostService{
 				if(fu.isJGPBImage(mpf)){
 					String fileExt = orgFileName.substring(orgFileName.lastIndexOf(".")+1, orgFileName.length());
 					String fileName = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date())+"."+fileExt;
-					String dir = "D:"+File.separator+"upload";
+					String dir = upload_path;
 					fu.uploadFileJGPB(mpf, fileName, dir);
 					result=fileName;
 				}else{

@@ -5,7 +5,7 @@
 		var headers = {};
 		headers["X-CSRF-TOKEN"] = opener.document.getElementsByName("_csrf")[0].value;
 		$.ajax({
-			url:"/file_upload_handler",
+			url:"/admin/file_upload_handler",
 			type:"post",
 			data:formData,
 			processData : false, //true : data의 파일형태가 query String으로 전송. false : non-processed data 
