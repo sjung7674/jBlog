@@ -10,7 +10,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-
+	<meta name="google-site-verification" content="QRcQ4lXXLJSxUmSrOlUnD0ER77LgbrIPgnvfdvu7bPw" />
   <title>jBlog</title>
 
   <!-- Bootstrap core CSS -->
