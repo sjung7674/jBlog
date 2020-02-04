@@ -7,7 +7,6 @@ import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.ws.spi.http.HttpContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -25,7 +24,7 @@ public class SiteControlInterceptor extends HandlerInterceptorAdapter{
 	@Autowired
 	private WriteServiceImpl writeService;
 	@Autowired
-	private LogDAOImpl logDAO;
+	private LogDAOImpl logDAO; 
 	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
